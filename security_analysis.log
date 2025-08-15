@@ -1259,3 +1259,229 @@ TypeError: '>' not supported between instances of 'int' and 'NoneType'
 2025-08-15 17:09:11,026 - __main__ - INFO - Executing agent: timeline with ES context
 2025-08-15 17:10:00,212 - __main__ - INFO - Agent timeline completed successfully with ES context
 2025-08-15 17:10:00,213 - __main__ - INFO - Integrated security analysis completed successfully
+2025-08-15 17:20:36,884 - gpu_utils - INFO - ⚡ Mixed Precision (AMP) Enabled
+2025-08-15 17:20:36,894 - gpu_utils - INFO - 🚀 GPU Acceleration Enabled: NVIDIA GeForce GTX 1650 (4.0GB)
+2025-08-15 17:20:36,894 - gpu_utils - INFO - ⚡ Mixed Precision (AMP) Enabled
+2025-08-15 17:20:36,894 - __main__ - INFO - 🚀 GPU Acceleration initialized: {'device': 'cuda:0', 'device_type': 'cuda', 'amp_enabled': True, 'gpu_name': 'NVIDIA GeForce GTX 1650', 'memory_total_gb': 3.99969482421875, 'memory_allocated_gb': 0.0, 'memory_cached_gb': 0.0}
+2025-08-15 17:20:44,744 - __main__ - INFO - Starting integrated security analysis for alert 2
+2025-08-15 17:20:44,744 - __main__ - INFO - Initializing ES Query Builder with events file: C:\Users\ADMIN\Pictures\latest\Spharaka-Windows_Events_Filtered.json
+2025-08-15 17:20:46,173 - __main__ - ERROR - Failed to initialize ES Query Builder: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu! (when checking argument for argument index in method wrapper_CUDA__index_select)
+2025-08-15 17:20:46,173 - __main__ - ERROR - Error in integrated security analysis: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu! (when checking argument for argument index in method wrapper_CUDA__index_select)
+2025-08-15 17:20:46,179 - __main__ - ERROR - Traceback: Traceback (most recent call last):
+  File "C:\Users\ADMIN\Pictures\latest\main_orchestrator.py", line 791, in analyze_security_alert_integrated
+    self.initialize_es_query_builder(events_file)
+  File "C:\Users\ADMIN\Pictures\latest\main_orchestrator.py", line 190, in initialize_es_query_builder
+    self.es_query_builder = ElasticsearchQueryBuilder(csv_file_path=events_file)
+  File "C:\Users\ADMIN\Pictures\latest\elastic_search.py", line 34, in __init__
+    self._precompute_embeddings()
+  File "C:\Users\ADMIN\Pictures\latest\elastic_search.py", line 179, in _precompute_embeddings
+    self.event_embeddings = self._get_embeddings(descriptions)
+  File "C:\Users\ADMIN\Pictures\latest\elastic_search.py", line 189, in _get_embeddings
+    outputs = self.model(**inputs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\transformers\models\bert\modeling_bert.py", line 942, in forward
+    embedding_output = self.embeddings(
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\transformers\models\bert\modeling_bert.py", line 180, in forward
+    inputs_embeds = self.word_embeddings(input_ids)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\sparse.py", line 190, in forward
+    return F.embedding(
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\functional.py", line 2551, in embedding
+    return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu! (when checking argument for argument index in method wrapper_CUDA__index_select)
+
+2025-08-15 17:25:09,179 - gpu_utils - INFO - ⚡ Mixed Precision (AMP) Enabled
+2025-08-15 17:25:09,179 - gpu_utils - INFO - 🚀 GPU Acceleration Enabled: NVIDIA GeForce GTX 1650 (4.0GB)
+2025-08-15 17:25:09,179 - gpu_utils - INFO - ⚡ Mixed Precision (AMP) Enabled
+2025-08-15 17:25:09,179 - __main__ - INFO - 🚀 GPU Acceleration initialized: {'device': 'cuda:0', 'device_type': 'cuda', 'amp_enabled': True, 'gpu_name': 'NVIDIA GeForce GTX 1650', 'memory_total_gb': 3.99969482421875, 'memory_allocated_gb': 0.0, 'memory_cached_gb': 0.0}
+2025-08-15 17:25:16,723 - __main__ - INFO - Starting integrated security analysis for alert 15
+2025-08-15 17:25:16,723 - __main__ - INFO - Initializing ES Query Builder with events file: C:\Users\ADMIN\Pictures\latest\Spharaka-Windows_Events_Filtered.json
+2025-08-15 17:25:22,216 - __main__ - INFO - ES Query Builder initialized successfully
+2025-08-15 17:25:22,216 - __main__ - INFO - Processing files using ES Query Builder
+2025-08-15 17:25:22,216 - __main__ - INFO - Loaded 20 alerts from C:\Users\ADMIN\Pictures\latest\alerts.jsonl
+2025-08-15 17:25:22,216 - __main__ - INFO - Selected alert: Failed Logon from Unknown Host
+2025-08-15 17:25:23,200 - __main__ - INFO - Loaded 58770 data entries from C:\Users\ADMIN\Pictures\latest\data.json
+2025-08-15 17:25:23,200 - __main__ - INFO - Alert info extracted: event_ids=['c0e932ba-10d3-44c6-a013-b0305644e608']
+2025-08-15 17:25:23,200 - __main__ - INFO - Found matching data entry
+2025-08-15 17:25:23,200 - __main__ - INFO - Loaded alert: Failed Logon from Unknown Host
+2025-08-15 17:25:23,200 - __main__ - INFO - Generating Elasticsearch queries
+2025-08-15 17:25:23,786 - __main__ - INFO - 🔍 IP Behavior query detected for IPs: ['192.168.1.104']
+2025-08-15 17:25:23,813 - __main__ - INFO - Found 10 relevant events for IP behavior (threshold: 0.2)
+2025-08-15 17:25:23,813 - __main__ - INFO - Generated queries successfully
+2025-08-15 17:25:23,813 - __main__ - INFO - Generated Elasticsearch queries
+2025-08-15 17:25:23,815 - __main__ - INFO - 🎯 IP Behavior routing active: focusing on IPs 192.168.1.104
+2025-08-15 17:25:23,815 - __main__ - INFO - Orchestration planned: 4 agents
+2025-08-15 17:25:23,815 - __main__ - INFO - Executing agent: alert_history with ES context
+2025-08-15 17:25:23,818 - __main__ - INFO - Executing agent: ip_agent with ES context
+2025-08-15 17:25:23,820 - __main__ - ERROR - Error executing agent ip_agent: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu! (when checking argument for argument index in method wrapper_CUDA__index_select)
+2025-08-15 17:25:23,820 - __main__ - ERROR - Error executing agent alert_history: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu! (when checking argument for argument index in method wrapper_CUDA__index_select)
+2025-08-15 17:25:23,827 - __main__ - ERROR - Traceback: Traceback (most recent call last):
+  File "C:\Users\ADMIN\Pictures\latest\main_orchestrator.py", line 369, in execute_agent_with_es_context
+    result = agent.analyze_ip(alert, data_entry, prompt)
+  File "C:\Users\ADMIN\Pictures\latest\ip_intelligence.py", line 310, in analyze_ip
+    analysis_categories = self.analyze_ip_intent(analysis_prompt)
+  File "C:\Users\ADMIN\Pictures\latest\ip_intelligence.py", line 75, in analyze_ip_intent
+    prompt_embedding = self._get_embeddings([analysis_prompt])
+  File "C:\Users\ADMIN\Pictures\latest\ip_intelligence.py", line 28, in _get_embeddings
+    outputs = self.model(**inputs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\transformers\models\bert\modeling_bert.py", line 942, in forward
+    embedding_output = self.embeddings(
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\transformers\models\bert\modeling_bert.py", line 180, in forward
+    inputs_embeds = self.word_embeddings(input_ids)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\sparse.py", line 190, in forward
+    return F.embedding(
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\functional.py", line 2551, in embedding
+    return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu! (when checking argument for argument index in method wrapper_CUDA__index_select)
+
+2025-08-15 17:25:23,827 - __main__ - ERROR - Traceback: Traceback (most recent call last):
+  File "C:\Users\ADMIN\Pictures\latest\alert_history.py", line 43, in _get_embeddings
+    outputs = self.model(**inputs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\transformers\models\bert\modeling_bert.py", line 942, in forward
+    embedding_output = self.embeddings(
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\transformers\models\bert\modeling_bert.py", line 180, in forward
+    inputs_embeds = self.word_embeddings(input_ids)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\sparse.py", line 190, in forward
+    return F.embedding(
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\functional.py", line 2551, in embedding
+    return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu! (when checking argument for argument index in method wrapper_CUDA__index_select)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ADMIN\Pictures\latest\main_orchestrator.py", line 382, in execute_agent_with_es_context
+    result = agent.analyze_alert_history(alert, data_entry, prompt)
+  File "C:\Users\ADMIN\Pictures\latest\alert_history.py", line 426, in analyze_alert_history
+    history_intent = self.analyze_history_intent(analysis_prompt)
+  File "C:\Users\ADMIN\Pictures\latest\alert_history.py", line 104, in analyze_history_intent
+    prompt_embedding = self._get_embeddings([analysis_prompt])
+  File "C:\Users\ADMIN\Pictures\latest\alert_history.py", line 58, in _get_embeddings
+    outputs = self.model(**inputs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\transformers\models\bert\modeling_bert.py", line 942, in forward
+    embedding_output = self.embeddings(
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\transformers\models\bert\modeling_bert.py", line 180, in forward
+    inputs_embeds = self.word_embeddings(input_ids)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\sparse.py", line 190, in forward
+    return F.embedding(
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\functional.py", line 2551, in embedding
+    return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu! (when checking argument for argument index in method wrapper_CUDA__index_select)
+
+2025-08-15 17:25:23,827 - __main__ - INFO - Parallel agent ip_agent completed
+2025-08-15 17:25:23,827 - __main__ - INFO - Parallel agent alert_history completed
+2025-08-15 17:25:23,827 - __main__ - INFO - Executing agent: summary with ES context
+2025-08-15 17:25:23,831 - __main__ - INFO - Agent summary completed successfully with ES context
+2025-08-15 17:25:23,831 - __main__ - INFO - Executing agent: timeline with ES context
+2025-08-15 17:25:23,831 - __main__ - ERROR - Error executing agent timeline: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu! (when checking argument for argument index in method wrapper_CUDA__index_select)
+2025-08-15 17:25:23,834 - __main__ - ERROR - Traceback: Traceback (most recent call last):
+  File "C:\Users\ADMIN\Pictures\latest\main_orchestrator.py", line 376, in execute_agent_with_es_context
+    result = agent.analyze_timeline(alert, data_entry, prompt, other_agent_data)
+  File "C:\Users\ADMIN\Pictures\latest\timeline_agent.py", line 464, in analyze_timeline
+    timeline_intent = self.analyze_timeline_intent(analysis_prompt)
+  File "C:\Users\ADMIN\Pictures\latest\timeline_agent.py", line 81, in analyze_timeline_intent
+    prompt_embedding = self._get_embeddings([analysis_prompt])
+  File "C:\Users\ADMIN\Pictures\latest\timeline_agent.py", line 29, in _get_embeddings
+    outputs = self.model(**inputs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\transformers\models\bert\modeling_bert.py", line 942, in forward
+    embedding_output = self.embeddings(
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\transformers\models\bert\modeling_bert.py", line 180, in forward
+    inputs_embeds = self.word_embeddings(input_ids)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\modules\sparse.py", line 190, in forward
+    return F.embedding(
+  File "C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\torch\nn\functional.py", line 2551, in embedding
+    return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu! (when checking argument for argument index in method wrapper_CUDA__index_select)
+
+2025-08-15 17:25:23,836 - __main__ - INFO - Integrated security analysis completed successfully
+2025-08-15 17:28:26,592 - gpu_utils - INFO - ⚡ Mixed Precision (AMP) Enabled
+2025-08-15 17:28:26,592 - gpu_utils - INFO - 🚀 GPU Acceleration Enabled: NVIDIA GeForce GTX 1650 (4.0GB)
+2025-08-15 17:28:26,592 - gpu_utils - INFO - ⚡ Mixed Precision (AMP) Enabled
+2025-08-15 17:28:26,592 - __main__ - INFO - 🚀 GPU Acceleration initialized: {'device': 'cuda:0', 'device_type': 'cuda', 'amp_enabled': True, 'gpu_name': 'NVIDIA GeForce GTX 1650', 'memory_total_gb': 3.99969482421875, 'memory_allocated_gb': 0.0, 'memory_cached_gb': 0.0}
+2025-08-15 17:28:34,539 - __main__ - INFO - Starting integrated security analysis for alert 13
+2025-08-15 17:28:34,539 - __main__ - INFO - Initializing ES Query Builder with events file: C:\Users\ADMIN\Pictures\latest\Spharaka-Windows_Events_Filtered.json
+2025-08-15 17:28:39,890 - __main__ - INFO - ES Query Builder initialized successfully
+2025-08-15 17:28:39,890 - __main__ - INFO - Processing files using ES Query Builder
+2025-08-15 17:28:39,890 - __main__ - INFO - Loaded 20 alerts from C:\Users\ADMIN\Pictures\latest\alerts.jsonl
+2025-08-15 17:28:39,890 - __main__ - INFO - Selected alert: Execution of Suspicious Script
+2025-08-15 17:28:40,889 - __main__ - INFO - Loaded 58770 data entries from C:\Users\ADMIN\Pictures\latest\data.json
+2025-08-15 17:28:40,889 - __main__ - INFO - Alert info extracted: event_ids=['002f9a72-62c4-48f4-a7f5-4361b92333ea']
+2025-08-15 17:28:40,889 - __main__ - INFO - Found matching data entry
+2025-08-15 17:28:40,889 - __main__ - INFO - Loaded alert: Execution of Suspicious Script
+2025-08-15 17:28:40,899 - __main__ - INFO - Generating Elasticsearch queries
+2025-08-15 17:28:41,375 - __main__ - INFO - 🔍 IP Behavior query detected for IPs: ['192.168.1.102']
+2025-08-15 17:28:41,388 - __main__ - INFO - Found 10 relevant events for IP behavior (threshold: 0.2)
+2025-08-15 17:28:41,388 - __main__ - INFO - Generated queries successfully
+2025-08-15 17:28:41,389 - __main__ - INFO - Generated Elasticsearch queries
+2025-08-15 17:28:41,389 - __main__ - INFO - 🎯 IP Behavior routing active: focusing on IPs 192.168.1.102
+2025-08-15 17:28:41,389 - __main__ - INFO - Orchestration planned: 4 agents
+2025-08-15 17:28:41,389 - __main__ - INFO - Executing agent: alert_history with ES context
+2025-08-15 17:28:41,389 - __main__ - INFO - Executing agent: ip_agent with ES context
+2025-08-15 17:29:46,941 - __main__ - INFO - Agent alert_history completed successfully with ES context
+2025-08-15 17:29:46,941 - __main__ - INFO - Parallel agent alert_history completed
+2025-08-15 17:29:47,204 - __main__ - INFO - Agent ip_agent completed successfully with ES context
+2025-08-15 17:29:47,204 - __main__ - INFO - Parallel agent ip_agent completed
+2025-08-15 17:29:47,204 - __main__ - INFO - Executing agent: summary with ES context
+2025-08-15 17:29:47,213 - __main__ - INFO - Agent summary completed successfully with ES context
+2025-08-15 17:29:47,213 - __main__ - INFO - Executing agent: timeline with ES context
+2025-08-15 17:30:37,024 - __main__ - INFO - Agent timeline completed successfully with ES context
+2025-08-15 17:30:37,025 - __main__ - INFO - Integrated security analysis completed successfully
+2025-08-15 17:35:01,240 - __main__ - WARNING - GPU initialization failed, using CPU: GradScaler.__init__() got an unexpected keyword argument 'device_type'

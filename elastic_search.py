@@ -179,12 +179,14 @@ class ElasticsearchQueryBuilder:
         self.event_embeddings = self._get_embeddings(descriptions)
         
     def _get_embeddings(self, texts: List[str]) -> np.ndarray:
-        from gpu_utils import move_to_device
         embeddings = []
-        device = self.model.device if hasattr(self.model, 'device') else next(self.model.parameters()).device
+        device = next(self.model.parameters()).device  # Always get the model's device
         for text in texts:
             inputs = self.tokenizer(text, return_tensors='pt', truncation=True, padding=True, max_length=512)
-            inputs = move_to_device(inputs, device=device)
+            # Explicitly move all input tensors to the model's device
+            for k in inputs:
+                if isinstance(inputs[k], torch.Tensor):
+                    inputs[k] = inputs[k].to(device)
             with torch.no_grad():
                 outputs = self.model(**inputs)
                 embedding = outputs.last_hidden_state[:, 0, :].cpu().numpy()[0]

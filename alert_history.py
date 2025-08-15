@@ -23,42 +23,42 @@ class AlertHistoryAgent:
     def _get_embeddings(self, texts: List[str]) -> np.ndarray:
         """Get embeddings for semantic analysis with GPU acceleration"""
         embeddings = []
-        
+        device = next(self.model.parameters()).device
         # Process in optimal batches
         batch_size = min(self.optimal_batch_size, len(texts))
-        
         try:
             for i in range(0, len(texts), batch_size):
                 batch_texts = texts[i:i + batch_size]
-                
                 # Tokenize batch
-                inputs = self.tokenizer(batch_texts, return_tensors='pt', truncation=True, 
-                                      padding=True, max_length=512)
-                
+                inputs = self.tokenizer(batch_texts, return_tensors='pt', truncation=True, padding=True, max_length=512)
                 # Move to device
                 inputs = move_to_device(inputs)
-                
+                # Explicitly move all tensors to model's device
+                for k in inputs:
+                    if isinstance(inputs[k], torch.Tensor):
+                        inputs[k] = inputs[k].to(device)
                 with amp_autocast():
                     with torch.no_grad():
                         outputs = self.model(**inputs)
                         batch_embeddings = outputs.last_hidden_state[:, 0, :].cpu().numpy()
                         embeddings.extend(batch_embeddings)
-            
             # Clear cache periodically
             if len(embeddings) > 100:
                 clear_cache()
-                
         except Exception as e:
             print(f"Batch processing failed: {e}, falling back to single processing")
             # Fallback to original method
             for text in texts:
                 inputs = self.tokenizer(text, return_tensors='pt', truncation=True, padding=True, max_length=512)
                 inputs = move_to_device(inputs)
+                # Explicitly move all tensors to model's device
+                for k in inputs:
+                    if isinstance(inputs[k], torch.Tensor):
+                        inputs[k] = inputs[k].to(device)
                 with torch.no_grad():
                     outputs = self.model(**inputs)
                     embedding = outputs.last_hidden_state[:, 0, :].cpu().numpy()[0]
                     embeddings.append(embedding)
-        
         return np.array(embeddings)
     
     def extract_alert_context(self, alert: Dict, data_entry: Dict) -> Dict[str, Any]:

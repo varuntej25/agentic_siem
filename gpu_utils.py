@@ -76,17 +76,24 @@ def amp_autocast():
     """Get appropriate AMP autocast context"""
     d = get_device()
     m = amp_mode()
+    # Use torch.amp.autocast for PyTorch 2.x+
+    try:
+        from torch.amp import autocast as amp_autocast_ctx
+        autocast_modern = True
+    except ImportError:
+        amp_autocast_ctx = torch.cuda.amp.autocast
+        autocast_modern = False
     if d.type != "cuda" or m == "off":
         return nullcontext()
     if m == "fp16":
-        return torch.cuda.amp.autocast(dtype=torch.float16)
+        return amp_autocast_ctx(device_type="cuda", dtype=torch.float16) if autocast_modern else amp_autocast_ctx(dtype=torch.float16)
     if m == "bf16":
-        return torch.cuda.amp.autocast(dtype=torch.bfloat16)
+        return amp_autocast_ctx(device_type="cuda", dtype=torch.bfloat16) if autocast_modern else amp_autocast_ctx(dtype=torch.bfloat16)
     # auto preference: bf16 if possible, else fp16
     try:
-        return torch.cuda.amp.autocast(dtype=torch.bfloat16)
+        return amp_autocast_ctx(device_type="cuda", dtype=torch.bfloat16) if autocast_modern else amp_autocast_ctx(dtype=torch.bfloat16)
     except Exception:
-        return torch.cuda.amp.autocast(dtype=torch.float16)
+        return amp_autocast_ctx(device_type="cuda", dtype=torch.float16) if autocast_modern else amp_autocast_ctx(dtype=torch.float16)
 
 # ----- tensor & batch movement -----
 def move_to_device(x, device=None):
@@ -112,7 +119,17 @@ def to_cuda(model: torch.nn.Module):
 # ----- training helpers -----
 def maybe_grad_scaler():
     """Get gradient scaler if using CUDA, else None"""
-    return torch.cuda.amp.GradScaler() if get_device().type == "cuda" else None
+    # Use torch.amp.GradScaler for PyTorch 2.x+ if available, else fallback
+    try:
+        from torch.amp import GradScaler as AmpGradScaler
+        # Check if device_type is a valid argument
+        import inspect
+        if 'device_type' in inspect.signature(AmpGradScaler).parameters:
+            return AmpGradScaler(device_type="cuda") if get_device().type == "cuda" else None
+        else:
+            return AmpGradScaler() if get_device().type == "cuda" else None
+    except ImportError:
+        return torch.cuda.amp.GradScaler() if get_device().type == "cuda" else None
 
 # ----- Backward compatibility with existing GPUAccelerator class -----
 class GPUAccelerator:
@@ -344,7 +361,16 @@ class GPUAccelerator:
         )
         
         if self.amp_enabled:
-            self.scaler = torch.cuda.amp.GradScaler()
+            # Use torch.amp.GradScaler for PyTorch 2.x+ if available, else fallback
+            try:
+                from torch.amp import GradScaler as AmpGradScaler
+                import inspect
+                if 'device_type' in inspect.signature(AmpGradScaler).parameters:
+                    self.scaler = AmpGradScaler(device_type="cuda")
+                else:
+                    self.scaler = AmpGradScaler()
+            except ImportError:
+                self.scaler = torch.cuda.amp.GradScaler()
             lightning_emoji = emoji("⚡")
             self.logger.info(f"{lightning_emoji} Mixed Precision (AMP) Enabled")
         else:

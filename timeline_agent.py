@@ -21,9 +21,14 @@ class TimelineAgent:
     def _get_embeddings(self, texts: List[str]) -> np.ndarray:
         """Get embeddings for semantic analysis"""
         embeddings = []
+        device = next(self.model.parameters()).device
         for text in texts:
             inputs = self.tokenizer(text, return_tensors='pt', truncation=True, padding=True, max_length=512)
             inputs = move_to_device(inputs)
+            # Explicitly move all tensors to model's device
+            for k in inputs:
+                if isinstance(inputs[k], torch.Tensor):
+                    inputs[k] = inputs[k].to(device)
             with amp_autocast():
                 with torch.no_grad():
                     outputs = self.model(**inputs)

@@ -1,0 +1,678 @@
+{
+  "orchestration": {
+    "selected_alert": {
+      "alertId": "1a270d4c-e49c-42ad-9602-c508f9798f23",
+      "triggeredAlertId": 2004,
+      "alertName": "Failed Logon from Unknown Host",
+      "tenantId": "tenant_001",
+      "events": "{'c0e932ba-10d3-44c6-a013-b0305644e608': 'windows_event_logs'}",
+      "anomalyScore": 75,
+      "threatCategory": "Detection",
+      "techniqeId": "T1059",
+      "subTechniqueId": "T1059.001",
+      "tacticId": "TA0002",
+      "alertType": "basic",
+      "recommendations": "Investigate host activity.",
+      "description": "Repeated failed logins from unfamiliar host",
+      "severity": "high",
+      "sendMail": true,
+      "ruleJson": "{\"rulename\": \"Failed_Logon_Unknown_Host\", \"conditions\": {\"ruleset\": [{\"fieldname\": \"eventType\", \"value\": \"authentication\", \"matchtype\": \"equals\"}, {\"fieldname\": \"status\", \"value\": \"failed\", \"matchtype\": \"equals\"}]}}",
+      "source": "windows_event_logs",
+      "createdAt": 1753528539300,
+      "updatedAt": 1753528539300,
+      "status": "Open"
+    },
+    "user_prompt": "user behaviour investigation",
+    "intent_analysis": {
+      "required_agents": [
+        "summary",
+        "alert_history",
+        "timeline",
+        "ip_agent",
+        "user_context"
+      ],
+      "analysis_type": "comprehensive",
+      "routing_decision": {
+        "included_agents": [
+          "summary",
+          "alert_history",
+          "timeline",
+          "ip_agent",
+          "user_context"
+        ],
+        "excluded_agents": [],
+        "reasons": {
+          "summary": "included: policy default",
+          "alert_history": "included: policy default",
+          "timeline": "included: policy default",
+          "ip_agent": "included: IP subject detected in prompt",
+          "user_context": "included: user subject detected in prompt"
+        },
+        "agent_prompts": {
+          "summary": "Alert: Failed Logon from Unknown Host (Severity: high). Compile findings from all agents and provide threat assessment. Task: user behaviour investigation",
+          "alert_history": "Alert: Failed Logon from Unknown Host (Severity: high). Find historical patterns and similar incidents. Task: user behaviour investigation",
+          "timeline": "Alert: Failed Logon from Unknown Host (Severity: high). Sort and analyze events chronologically from calling agents. Task: user behaviour investigation",
+          "ip_agent": "Alert: Failed Logon from Unknown Host (Severity: high). Investigate network behavior, IP connections, and traffic patterns. Task: user behaviour investigation",
+          "user_context": "Alert: Failed Logon from Unknown Host (Severity: high). Analyze user behavior, authentication patterns, and account activities. Task: user behaviour investigation"
+        }
+      },
+      "primary_subjects": "{'ip', 'user'}"
+    },
+    "agent_prompts": {
+      "summary": "Alert: Failed Logon from Unknown Host (Severity: high). Compile findings from all agents and provide threat assessment. Task: user behaviour investigation",
+      "alert_history": "Alert: Failed Logon from Unknown Host (Severity: high). Find historical patterns and similar incidents. Task: user behaviour investigation",
+      "timeline": "Alert: Failed Logon from Unknown Host (Severity: high). Sort and analyze events chronologically from calling agents. Task: user behaviour investigation",
+      "ip_agent": "Alert: Failed Logon from Unknown Host (Severity: high). Investigate network behavior, IP connections, and traffic patterns. Task: user behaviour investigation",
+      "user_context": "Alert: Failed Logon from Unknown Host (Severity: high). Analyze user behavior, authentication patterns, and account activities. Task: user behaviour investigation"
+    },
+    "execution_plan": {
+      "step_1": "Deploy selected agents based on evidence: alert_history, timeline, ip_agent, user_context",
+      "step_2": "Collect agent results",
+      "step_3": "Execute timeline and alert history analysis if selected",
+      "step_4": "Generate summary report"
+    }
+  },
+  "elasticsearch_context": {
+    "alert_id": "1a270d4c-e49c-42ad-9602-c508f9798f23",
+    "user_prompt": "user behaviour investigation",
+    "query_type": "contextual",
+    "exact_match_query": {
+      "query": {
+        "bool": {
+          "filter": [
+            {
+              "terms": {
+                "eventId": [
+                  "c0e932ba-10d3-44c6-a013-b0305644e608"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "contextual_query": {
+      "query": {
+        "bool": {
+          "filter": [
+            {
+              "terms": {
+                "eventID": [
+                  4738,
+                  1101,
+                  1104,
+                  1105,
+                  1108
+                ]
+              }
+            },
+            {
+              "term": {
+                "srcIP": "192.168.1.104"
+              }
+            },
+            {
+              "term": {
+                "targetUsername": "jdoe"
+              }
+            },
+            {
+              "term": {
+                "hostName": "host-104"
+              }
+            },
+            {
+              "term": {
+                "targetDomain": "CORP"
+              }
+            },
+            {
+              "term": {
+                "processName": "lsass.exe"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "combined_query": {
+      "query": {
+        "bool": {
+          "should": [
+            {
+              "bool": {
+                "filter": [
+                  {
+                    "terms": {
+                      "eventId": [
+                        "c0e932ba-10d3-44c6-a013-b0305644e608"
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "bool": {
+                "filter": [
+                  {
+                    "terms": {
+                      "eventID": [
+                        4738,
+                        1101,
+                        1104,
+                        1105,
+                        1108
+                      ]
+                    }
+                  },
+                  {
+                    "term": {
+                      "srcIP": "192.168.1.104"
+                    }
+                  },
+                  {
+                    "term": {
+                      "targetUsername": "jdoe"
+                    }
+                  },
+                  {
+                    "term": {
+                      "hostName": "host-104"
+                    }
+                  },
+                  {
+                    "term": {
+                      "targetDomain": "CORP"
+                    }
+                  },
+                  {
+                    "term": {
+                      "processName": "lsass.exe"
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "minimum_should_match": 1
+        }
+      },
+      "sort": [
+        {
+          "timestamp": {
+            "order": "desc"
+          }
+        }
+      ],
+      "size": 100
+    },
+    "elasticsearch_query": {
+      "query": {
+        "bool": {
+          "should": [
+            {
+              "bool": {
+                "filter": [
+                  {
+                    "terms": {
+                      "eventId": [
+                        "c0e932ba-10d3-44c6-a013-b0305644e608"
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "bool": {
+                "filter": [
+                  {
+                    "terms": {
+                      "eventID": [
+                        4738,
+                        1101,
+                        1104,
+                        1105,
+                        1108
+                      ]
+                    }
+                  },
+                  {
+                    "term": {
+                      "srcIP": "192.168.1.104"
+                    }
+                  },
+                  {
+                    "term": {
+                      "targetUsername": "jdoe"
+                    }
+                  },
+                  {
+                    "term": {
+                      "hostName": "host-104"
+                    }
+                  },
+                  {
+                    "term": {
+                      "targetDomain": "CORP"
+                    }
+                  },
+                  {
+                    "term": {
+                      "processName": "lsass.exe"
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "minimum_should_match": 1
+        }
+      },
+      "sort": [
+        {
+          "timestamp": {
+            "order": "desc"
+          }
+        }
+      ],
+      "size": 100
+    },
+    "alert_context": {
+      "alert_id": "1a270d4c-e49c-42ad-9602-c508f9798f23",
+      "event_ids": [
+        "c0e932ba-10d3-44c6-a013-b0305644e608"
+      ],
+      "rule_event_ids": [],
+      "context": {
+        "severity": "high",
+        "alert_type": "basic",
+        "threat_category": "Detection",
+        "technique_id": null
+      }
+    },
+    "data_context": {
+      "host_name": "host-104",
+      "src_ip": "192.168.1.104",
+      "target_username": "jdoe",
+      "account_name": "jdoe",
+      "target_domain": "CORP",
+      "process_name": "lsass.exe",
+      "event_id": 4625,
+      "logon_type": "3",
+      "event_type": "authentication"
+    }
+  },
+  "agent_results": [
+    {
+      "agent_type": "user_context",
+      "user_context": {
+        "username": "jdoe",
+        "domain": "CORP",
+        "host": "host-104",
+        "logon_type": "3",
+        "process": "lsass.exe",
+        "privileges": "SeInteractiveLogonRight",
+        "ip": "192.168.1.104",
+        "event_id": 4625,
+        "alert_info": {
+          "alert_id": "1a270d4c-e49c-42ad-9602-c508f9798f23",
+          "alert_name": "Failed Logon from Unknown Host",
+          "severity": "high",
+          "timestamp": 1753528539300
+        }
+      },
+      "analysis_categories": [
+        "authentication_analysis",
+        "activity_analysis",
+        "privilege_analysis",
+        "temporal_analysis",
+        "account_analysis",
+        "network_analysis"
+      ],
+      "analysis": {
+        "findings": [
+          "No authentication activity found"
+        ],
+        "risk_score": 15,
+        "patterns": [],
+        "anomalies": []
+      },
+      "risk_level": "LOW",
+      "report": "USER CONTEXT ANALYSIS\nUser: jdoe\nRisk Level: LOW\nRisk Score: 15/100\nAnalysis Focus: Alert: Failed Logon from Unknown Host (Severity: high). Analyze user behavior, authentication patterns, and account activities. Task: user behaviour investigation\nFINDINGS:\n\u2022 No authentication activity found",
+      "queries_executed": 6,
+      "es_context": {
+        "queries_available": 6,
+        "relevant_events_count": 10,
+        "data_entries_available": 58770
+      }
+    },
+    {
+      "agent_type": "alert_history",
+      "alert_context": {
+        "current_alert": {
+          "alert_id": "1a270d4c-e49c-42ad-9602-c508f9798f23",
+          "alert_name": "Failed Logon from Unknown Host",
+          "severity": "high",
+          "alert_type": "basic",
+          "threat_category": "Detection",
+          "technique_id": null,
+          "tactic_id": "TA0002",
+          "description": "Repeated failed logins from unfamiliar host",
+          "timestamp": 1753528539300
+        },
+        "event_id": 4625,
+        "user": "jdoe",
+        "host": "host-104",
+        "ip": "192.168.1.104",
+        "process": "lsass.exe",
+        "domain": "CORP",
+        "logon_type": "3",
+        "source_system": "spharaka-windows"
+      },
+      "history_intent": {
+        "categories": [
+          "pattern_matching",
+          "trend_analysis",
+          "attack_correlation",
+          "user_history",
+          "ip_reputation",
+          "technique_analysis",
+          "seasonal_analysis",
+          "escalation_patterns"
+        ],
+        "lookback_period": "last_6_months",
+        "focus": "comprehensive"
+      },
+      "historical_analysis": {
+        "pattern_findings": [],
+        "trend_analysis": [],
+        "correlations": [],
+        "risk_indicators": [],
+        "historical_context": [
+          "No similar historical alerts found - potentially new threat"
+        ],
+        "threat_assessment": "NOVEL_ACTIVITY",
+        "confidence_score": 10
+      },
+      "recurrence_risk": {
+        "recurrence_probability": "LOW",
+        "risk_factors": [],
+        "mitigation_urgency": "NORMAL"
+      },
+      "threat_assessment": "NOVEL_ACTIVITY",
+      "confidence_score": 10,
+      "report": "ALERT HISTORY ANALYSIS REPORT\nCurrent Alert: Failed Logon from Unknown Host\nAlert Type: basic\nThreat Assessment: NOVEL_ACTIVITY\nHistorical Confidence: 10/100\nRecurrence Risk: LOW\nMitigation Urgency: NORMAL\nHISTORICAL CONTEXT:\n\u2022 No similar historical alerts found - potentially new threat",
+      "queries_executed": 8,
+      "es_context": {
+        "queries_available": 6,
+        "relevant_events_count": 10,
+        "data_entries_available": 58770
+      }
+    },
+    {
+      "agent_type": "ip_agent",
+      "ip_context": {
+        "primary_ip": "192.168.1.104",
+        "host": "host-104",
+        "connection_type": "3",
+        "process": "lsass.exe",
+        "user": "jdoe",
+        "domain": "CORP",
+        "location": {
+          "country": "",
+          "city": "",
+          "coordinates": [
+            0,
+            0
+          ]
+        },
+        "alert_info": {
+          "alert_id": "1a270d4c-e49c-42ad-9602-c508f9798f23",
+          "alert_name": "Failed Logon from Unknown Host",
+          "severity": "high",
+          "timestamp": 1753528539300
+        }
+      },
+      "analysis_categories": [
+        "traffic_analysis",
+        "connection_analysis",
+        "geographic_analysis",
+        "reputation_analysis",
+        "behavior_analysis",
+        "communication_analysis",
+        "temporal_analysis",
+        "security_analysis"
+      ],
+      "analysis": {
+        "findings": [
+          "No direct traffic found for this IP"
+        ],
+        "risk_score": 0,
+        "network_patterns": [],
+        "security_indicators": [],
+        "anomalies": []
+      },
+      "risk_level": "NORMAL",
+      "report": "IP CONTEXT ANALYSIS\nIP Address: 192.168.1.104\nHost: host-104\nRisk Level: NORMAL\nRisk Score: 0/100\nAnalysis Focus: Alert: Failed Logon from Unknown Host (Severity: high). Investigate network behavior, IP connections, and traffic patterns. Task: user behaviour investigation\nNETWORK FINDINGS:\n\u2022 No direct traffic found for this IP",
+      "queries_executed": 8,
+      "es_context": {
+        "queries_available": 6,
+        "relevant_events_count": 10,
+        "data_entries_available": 58770
+      }
+    },
+    {
+      "overall_risk_level": "LOW",
+      "overall_risk_score": 30,
+      "overall_risk_reason": "Driven by user_context = LOW, ip_agent = LOW.",
+      "executive_summary": "Alert 'Failed Logon from Unknown Host' (severity: high) was triggered and required investigation. We examined user behavior, historical patterns and IP behavior. User behavior analysis returned LOW: No authentication activity found Historical patterns analysis returned NORMAL: Historical pattern analysis completed. Ip behavior analysis returned LOW: No direct traffic found for this IP This appears to be a low-risk situation but should be documented for trend analysis. Overall assessment: LOW risk (30/100). Recommended actions: Monitor situation for changes; Document incident details; Consider alert threshold adjustments.",
+      "agent_status": {
+        "summary": {
+          "status_label": "NORMAL",
+          "reason": "Summary compilation completed successfully."
+        },
+        "user_context": {
+          "status_label": "LOW",
+          "reason": "No authentication activity found"
+        },
+        "alert_history": {
+          "status_label": "NORMAL",
+          "reason": "Historical pattern analysis completed."
+        },
+        "ip_agent": {
+          "status_label": "LOW",
+          "reason": "No direct traffic found for this IP"
+        }
+      },
+      "highlights": [
+        "No significant security concerns identified",
+        "All analysis completed within normal parameters"
+      ],
+      "included_agents": [
+        "summary",
+        "user_context",
+        "alert_history",
+        "ip_agent"
+      ],
+      "errors": [],
+      "es_context": {
+        "queries_available": 6,
+        "relevant_events_count": 10,
+        "data_entries_available": 58770
+      }
+    },
+    {
+      "agent_type": "timeline",
+      "temporal_context": {
+        "primary_timestamp": 1753520400000,
+        "alert_timestamp": 1753528539300,
+        "event_id": 4625,
+        "user": "jdoe",
+        "host": "host-104",
+        "ip": "192.168.1.104",
+        "process": "lsass.exe",
+        "action": "authentication",
+        "severity": "high",
+        "alert_info": {
+          "alert_id": "1a270d4c-e49c-42ad-9602-c508f9798f23",
+          "alert_name": "Failed Logon from Unknown Host",
+          "alert_severity": "high"
+        }
+      },
+      "timeline_intent": {
+        "categories": [
+          "sequence_analysis",
+          "pattern_analysis",
+          "correlation_analysis",
+          "anomaly_analysis",
+          "progression_analysis",
+          "duration_analysis",
+          "frequency_analysis"
+        ],
+        "time_window": "contextual",
+        "focus": "comprehensive"
+      },
+      "timeline_events": [
+        {
+          "timestamp": 1753528539300,
+          "event_type": "user_analysis",
+          "description": "User analysis completed: LOW",
+          "user": "jdoe",
+          "source": "user_context_agent",
+          "analysis_data": {
+            "agent_type": "user_context",
+            "user_context": {
+              "username": "jdoe",
+              "domain": "CORP",
+              "host": "host-104",
+              "logon_type": "3",
+              "process": "lsass.exe",
+              "privileges": "SeInteractiveLogonRight",
+              "ip": "192.168.1.104",
+              "event_id": 4625,
+              "alert_info": {
+                "alert_id": "1a270d4c-e49c-42ad-9602-c508f9798f23",
+                "alert_name": "Failed Logon from Unknown Host",
+                "severity": "high",
+                "timestamp": 1753528539300
+              }
+            },
+            "analysis_categories": [
+              "authentication_analysis",
+              "activity_analysis",
+              "privilege_analysis",
+              "temporal_analysis",
+              "account_analysis",
+              "network_analysis"
+            ],
+            "analysis": {
+              "findings": [
+                "No authentication activity found"
+              ],
+              "risk_score": 15,
+              "patterns": [],
+              "anomalies": []
+            },
+            "risk_level": "LOW",
+            "report": "USER CONTEXT ANALYSIS\nUser: jdoe\nRisk Level: LOW\nRisk Score: 15/100\nAnalysis Focus: Alert: Failed Logon from Unknown Host (Severity: high). Analyze user behavior, authentication patterns, and account activities. Task: user behaviour investigation\nFINDINGS:\n\u2022 No authentication activity found",
+            "queries_executed": 6,
+            "es_context": {
+              "queries_available": 6,
+              "relevant_events_count": 10,
+              "data_entries_available": 58770
+            }
+          }
+        },
+        {
+          "timestamp": 1753528539300,
+          "event_type": "ip_analysis",
+          "description": "IP analysis completed: NORMAL",
+          "ip": "192.168.1.104",
+          "source": "ip_agent",
+          "analysis_data": {
+            "agent_type": "ip_agent",
+            "ip_context": {
+              "primary_ip": "192.168.1.104",
+              "host": "host-104",
+              "connection_type": "3",
+              "process": "lsass.exe",
+              "user": "jdoe",
+              "domain": "CORP",
+              "location": {
+                "country": "",
+                "city": "",
+                "coordinates": [
+                  0,
+                  0
+                ]
+              },
+              "alert_info": {
+                "alert_id": "1a270d4c-e49c-42ad-9602-c508f9798f23",
+                "alert_name": "Failed Logon from Unknown Host",
+                "severity": "high",
+                "timestamp": 1753528539300
+              }
+            },
+            "analysis_categories": [
+              "traffic_analysis",
+              "connection_analysis",
+              "geographic_analysis",
+              "reputation_analysis",
+              "behavior_analysis",
+              "communication_analysis",
+              "temporal_analysis",
+              "security_analysis"
+            ],
+            "analysis": {
+              "findings": [
+                "No direct traffic found for this IP"
+              ],
+              "risk_score": 0,
+              "network_patterns": [],
+              "security_indicators": [],
+              "anomalies": []
+            },
+            "risk_level": "NORMAL",
+            "report": "IP CONTEXT ANALYSIS\nIP Address: 192.168.1.104\nHost: host-104\nRisk Level: NORMAL\nRisk Score: 0/100\nAnalysis Focus: Alert: Failed Logon from Unknown Host (Severity: high). Investigate network behavior, IP connections, and traffic patterns. Task: user behaviour investigation\nNETWORK FINDINGS:\n\u2022 No direct traffic found for this IP",
+            "queries_executed": 8,
+            "es_context": {
+              "queries_available": 6,
+              "relevant_events_count": 10,
+              "data_entries_available": 58770
+            }
+          }
+        }
+      ],
+      "timeline_analysis": {
+        "total_events": 2,
+        "time_span": "0 minutes",
+        "patterns": [],
+        "correlations": [],
+        "anomalies": [],
+        "progression": [],
+        "risk_score": 0
+      },
+      "report": "TIMELINE ANALYSIS REPORT\nAlert: Failed Logon from Unknown Host\nTime Span: 0 minutes\nTotal Events: 2\nTimeline Risk Score: 0/100\nEVENT TIMELINE:\n1. User analysis completed: LOW [user_context_agent]\n2. IP analysis completed: NORMAL [ip_agent]",
+      "queries_executed": 6,
+      "es_context": {
+        "queries_available": 6,
+        "relevant_events_count": 10,
+        "data_entries_available": 58770
+      }
+    }
+  ],
+  "overall_risk_score": 30,
+  "overall_risk_level": "LOW",
+  "executive_summary": "\nINTEGRATED SECURITY ANALYSIS REPORT\n===================================\nAlert: Failed Logon from Unknown Host\nSeverity: high\nOverall Risk Assessment: LOW (30/100)\nAnalysis Completed: 2025-08-15 00:02:04\n\nELASTICSEARCH INTEGRATION:\n\u2022 Analysis Type: contextual\n\u2022 Data Entries Analyzed: 58770\n\u2022 Relevant Events Found: 10\n\u2022 Query Success: \u2713\n\nEXECUTION SUMMARY:\n\u2022 Agents Executed: 5 successful, 0 failed\n\u2022 Total Queries: 28\n\u2022 ES Context Utilized: 5\n\nDETAILED ELASTICSEARCH QUERIES:\n\u2022 Exact Match Query: Targeting specific event IDs\n\u2022 Contextual Query: 6 filters applied\n\u2022 Combined Query: Merging exact and contextual searches\n\u2022 Top Relevant Event: 4738 (similarity: 0.89)\n\nAGENT RESULTS:\n\u2022 USER_CONTEXT: LOW [ES: \u2713] | 6 queries\n\u2022 ALERT_HISTORY: UNKNOWN [ES: \u2713] | 8 queries\n\u2022 IP_AGENT: NORMAL [ES: \u2713] | 8 queries\n\u2022 UNKNOWN: UNKNOWN [ES: \u2713]\n\u2022 TIMELINE: UNKNOWN [ES: \u2713] | 6 queries\n\nKEY FINDINGS:\n\u2022 [USER_CONTEXT] No authentication activity found\n\u2022 [IP_AGENT] No direct traffic found for this IP\n\u2022 [IP_AGENT] IP Address: 192.168.1.104\n\nRECOMMENDATIONS:\n\u2022 Continue monitoring situation\n\u2022 Review alert tuning if false positive\n\u2022 Document analysis for trend analysis\n\u2022 Update detection rules as needed\n\u2022 Store Elasticsearch queries for future reference\n\nERROR SUMMARY:\n\u2022 No errors encountered\n",
+  "successful_agents": 5,
+  "failed_agents": 0,
+  "es_integration_stats": {
+    "relevant_events_found": 10,
+    "queries_generated": 9,
+    "data_entries_processed": 58770,
+    "agents_with_es_context": 5
+  },
+  "analysis_timestamp": "2025-08-15T00:02:04.209392"
+}

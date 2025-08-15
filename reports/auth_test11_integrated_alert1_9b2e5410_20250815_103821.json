@@ -1,0 +1,740 @@
+{
+  "orchestration": {
+    "selected_alert": {
+      "alertId": "9b2e5410-a3af-4d4e-9c43-fc28a72bdb35",
+      "triggeredAlertId": 4000,
+      "alertName": "Explicit Credential Logon Attempt",
+      "tenantId": "tenant_001",
+      "events": "{'b3866106-621f-4ad7-90bd-b2e2a5f0e694': 'windows_event_logs'}",
+      "anomalyScore": 65,
+      "threatCategory": "Detection",
+      "techniqeId": "T1021.002",
+      "subTechniqueId": "T1021.002.001",
+      "tacticId": "TA0005",
+      "alertType": "basic",
+      "recommendations": "Review event 4648 details.",
+      "description": "Logon using explicit credentials",
+      "severity": "medium",
+      "sendMail": true,
+      "ruleJson": "{\"rulename\": \"Explicit_Credential_Logon_Attempt\", \"conditions\": {\"ruleset\": [{\"fieldname\": \"eventID\", \"value\": \"4648\", \"matchtype\": \"equals\"}]}}",
+      "source": "windows_event_logs",
+      "createdAt": 1753529673431,
+      "updatedAt": 1753529673431,
+      "status": "Open"
+    },
+    "user_prompt": "investigate IP authentication patterns",
+    "intent_analysis": {
+      "required_agents": [
+        "summary",
+        "alert_history",
+        "timeline",
+        "ip_agent",
+        "user_context"
+      ],
+      "analysis_type": "comprehensive",
+      "routing_decision": {
+        "included_agents": [
+          "summary",
+          "alert_history",
+          "timeline",
+          "ip_agent",
+          "user_context"
+        ],
+        "excluded_agents": [],
+        "reasons": {
+          "summary": "included: policy default",
+          "alert_history": "included: policy default",
+          "timeline": "included: policy default",
+          "ip_agent": "included: IP subject detected in prompt",
+          "user_context": "included: user subject detected in prompt"
+        },
+        "agent_prompts": {
+          "summary": "Alert: Explicit Credential Logon Attempt (Severity: medium). Compile findings from all agents and provide threat assessment. Task: investigate IP authentication patterns",
+          "alert_history": "Alert: Explicit Credential Logon Attempt (Severity: medium). Find historical patterns and similar incidents. Task: investigate IP authentication patterns",
+          "timeline": "Alert: Explicit Credential Logon Attempt (Severity: medium). Sort and analyze events chronologically from calling agents. Task: investigate IP authentication patterns",
+          "ip_agent": "Alert: Explicit Credential Logon Attempt (Severity: medium). Investigate network behavior, IP connections, and traffic patterns. Task: investigate IP authentication patterns",
+          "user_context": "Alert: Explicit Credential Logon Attempt (Severity: medium). Analyze user behavior, authentication patterns, and account activities. Task: investigate IP authentication patterns"
+        }
+      },
+      "primary_subjects": "{'user', 'ip'}"
+    },
+    "agent_prompts": {
+      "summary": "Alert: Explicit Credential Logon Attempt (Severity: medium). Compile findings from all agents and provide threat assessment. Task: investigate IP authentication patterns",
+      "alert_history": "Alert: Explicit Credential Logon Attempt (Severity: medium). Find historical patterns and similar incidents. Task: investigate IP authentication patterns",
+      "timeline": "Alert: Explicit Credential Logon Attempt (Severity: medium). Sort and analyze events chronologically from calling agents. Task: investigate IP authentication patterns",
+      "ip_agent": "Alert: Explicit Credential Logon Attempt (Severity: medium). Focus on IP behavior analysis for: 10.0.0.1. Task: investigate IP authentication patterns",
+      "user_context": "Alert: Explicit Credential Logon Attempt (Severity: medium). Analyze user behavior, authentication patterns, and account activities. Task: investigate IP authentication patterns"
+    },
+    "execution_plan": {
+      "step_1": "Deploy selected agents based on evidence: alert_history, timeline, ip_agent, user_context",
+      "step_2": "Collect agent results",
+      "step_3": "Execute timeline and alert history analysis if selected",
+      "step_4": "Generate summary report"
+    },
+    "ip_behavior_active": true,
+    "subject_ips": [
+      "10.0.0.1"
+    ]
+  },
+  "elasticsearch_context": {
+    "alert_id": "9b2e5410-a3af-4d4e-9c43-fc28a72bdb35",
+    "user_prompt": "investigate IP authentication patterns",
+    "query_type": "ip_behavior",
+    "extracted_ips": [
+      "10.0.0.1"
+    ],
+    "extracted_event_ids": [
+      "b3866106-621f-4ad7-90bd-b2e2a5f0e694"
+    ],
+    "ip_focused_query": {
+      "size": 1000,
+      "query": {
+        "bool": {
+          "should": [
+            {
+              "terms": {
+                "srcIP": [
+                  "10.0.0.1"
+                ]
+              }
+            },
+            {
+              "terms": {
+                "src_ip": [
+                  "10.0.0.1"
+                ]
+              }
+            },
+            {
+              "terms": {
+                "sourceIP": [
+                  "10.0.0.1"
+                ]
+              }
+            },
+            {
+              "terms": {
+                "source_ip": [
+                  "10.0.0.1"
+                ]
+              }
+            },
+            {
+              "terms": {
+                "destIP": [
+                  "10.0.0.1"
+                ]
+              }
+            },
+            {
+              "terms": {
+                "dest_ip": [
+                  "10.0.0.1"
+                ]
+              }
+            },
+            {
+              "terms": {
+                "destinationIP": [
+                  "10.0.0.1"
+                ]
+              }
+            },
+            {
+              "terms": {
+                "destination_ip": [
+                  "10.0.0.1"
+                ]
+              }
+            },
+            {
+              "terms": {
+                "clientIP": [
+                  "10.0.0.1"
+                ]
+              }
+            },
+            {
+              "terms": {
+                "client_ip": [
+                  "10.0.0.1"
+                ]
+              }
+            },
+            {
+              "terms": {
+                "serverIP": [
+                  "10.0.0.1"
+                ]
+              }
+            },
+            {
+              "terms": {
+                "server_ip": [
+                  "10.0.0.1"
+                ]
+              }
+            }
+          ],
+          "minimum_should_match": 1,
+          "filter": [
+            {
+              "range": {
+                "@timestamp": {
+                  "gte": "now-30d"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "sort": [
+        {
+          "@timestamp": {
+            "order": "desc"
+          }
+        }
+      ],
+      "aggregations": {
+        "ip_activity_summary": {
+          "multi_terms": {
+            "terms": [
+              {
+                "field": "srcIP.keyword"
+              },
+              {
+                "field": "eventType.keyword"
+              },
+              {
+                "field": "severity.keyword"
+              }
+            ],
+            "size": 100
+          }
+        },
+        "timeline_activity": {
+          "date_histogram": {
+            "field": "@timestamp",
+            "interval": "1h"
+          }
+        }
+      }
+    },
+    "query_metadata": {
+      "query_type": "ip_behavior",
+      "target_ips": [
+        "10.0.0.1"
+      ],
+      "es_host": "http://localhost:9200",
+      "es_index": "spharaka-windows-000001",
+      "description": "IP behavior analysis query for: 10.0.0.1"
+    },
+    "elasticsearch_query": {
+      "size": 1000,
+      "query": {
+        "bool": {
+          "should": [
+            {
+              "terms": {
+                "srcIP": [
+                  "10.0.0.1"
+                ]
+              }
+            },
+            {
+              "terms": {
+                "src_ip": [
+                  "10.0.0.1"
+                ]
+              }
+            },
+            {
+              "terms": {
+                "sourceIP": [
+                  "10.0.0.1"
+                ]
+              }
+            },
+            {
+              "terms": {
+                "source_ip": [
+                  "10.0.0.1"
+                ]
+              }
+            },
+            {
+              "terms": {
+                "destIP": [
+                  "10.0.0.1"
+                ]
+              }
+            },
+            {
+              "terms": {
+                "dest_ip": [
+                  "10.0.0.1"
+                ]
+              }
+            },
+            {
+              "terms": {
+                "destinationIP": [
+                  "10.0.0.1"
+                ]
+              }
+            },
+            {
+              "terms": {
+                "destination_ip": [
+                  "10.0.0.1"
+                ]
+              }
+            },
+            {
+              "terms": {
+                "clientIP": [
+                  "10.0.0.1"
+                ]
+              }
+            },
+            {
+              "terms": {
+                "client_ip": [
+                  "10.0.0.1"
+                ]
+              }
+            },
+            {
+              "terms": {
+                "serverIP": [
+                  "10.0.0.1"
+                ]
+              }
+            },
+            {
+              "terms": {
+                "server_ip": [
+                  "10.0.0.1"
+                ]
+              }
+            }
+          ],
+          "minimum_should_match": 1,
+          "filter": [
+            {
+              "range": {
+                "@timestamp": {
+                  "gte": "now-30d"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "sort": [
+        {
+          "@timestamp": {
+            "order": "desc"
+          }
+        }
+      ],
+      "aggregations": {
+        "ip_activity_summary": {
+          "multi_terms": {
+            "terms": [
+              {
+                "field": "srcIP.keyword"
+              },
+              {
+                "field": "eventType.keyword"
+              },
+              {
+                "field": "severity.keyword"
+              }
+            ],
+            "size": 100
+          }
+        },
+        "timeline_activity": {
+          "date_histogram": {
+            "field": "@timestamp",
+            "interval": "1h"
+          }
+        }
+      }
+    },
+    "subject": "10.0.0.1",
+    "description": "IP behavior analysis for: 10.0.0.1"
+  },
+  "agent_results": [
+    {
+      "agent_type": "user_context",
+      "user_context": {
+        "username": "svc-sys",
+        "domain": "CORP",
+        "host": "host-200",
+        "logon_type": "3",
+        "process": "cmd.exe",
+        "privileges": "SeSystemtimePrivilege",
+        "ip": "10.0.0.1",
+        "event_id": 4648,
+        "alert_info": {
+          "alert_id": "9b2e5410-a3af-4d4e-9c43-fc28a72bdb35",
+          "alert_name": "Explicit Credential Logon Attempt",
+          "severity": "medium",
+          "timestamp": 1753529673431
+        }
+      },
+      "analysis_categories": [
+        "authentication_analysis",
+        "activity_analysis",
+        "privilege_analysis",
+        "temporal_analysis",
+        "account_analysis",
+        "network_analysis"
+      ],
+      "analysis": {
+        "findings": [
+          "No authentication activity found"
+        ],
+        "risk_score": 15,
+        "patterns": [],
+        "anomalies": []
+      },
+      "risk_level": "LOW",
+      "report": "USER CONTEXT ANALYSIS\nUser: svc-sys\nRisk Level: LOW\nRisk Score: 15/100\nAnalysis Focus: Alert: Explicit Credential Logon Attempt (Severity: medium). Analyze user behavior, authentication patterns, and account activities. Task: investigate IP authentication patterns\nFINDINGS:\n\u2022 No authentication activity found",
+      "queries_executed": 6,
+      "es_context": {
+        "queries_available": 4,
+        "relevant_events_count": 9,
+        "data_entries_available": 58770
+      }
+    },
+    {
+      "agent_type": "alert_history",
+      "alert_context": {
+        "current_alert": {
+          "alert_id": "9b2e5410-a3af-4d4e-9c43-fc28a72bdb35",
+          "alert_name": "Explicit Credential Logon Attempt",
+          "severity": "medium",
+          "alert_type": "basic",
+          "threat_category": "Detection",
+          "technique_id": null,
+          "tactic_id": "TA0005",
+          "description": "Logon using explicit credentials",
+          "timestamp": 1753529673431
+        },
+        "event_id": 4648,
+        "user": "svc-sys",
+        "host": "host-200",
+        "ip": "10.0.0.1",
+        "process": "cmd.exe",
+        "domain": "CORP",
+        "logon_type": "3",
+        "source_system": "spharaka-windows"
+      },
+      "history_intent": {
+        "categories": [
+          "pattern_matching",
+          "trend_analysis",
+          "attack_correlation",
+          "user_history",
+          "ip_reputation",
+          "technique_analysis",
+          "seasonal_analysis",
+          "escalation_patterns"
+        ],
+        "lookback_period": "last_6_months",
+        "focus": "comprehensive"
+      },
+      "historical_analysis": {
+        "pattern_findings": [],
+        "trend_analysis": [],
+        "correlations": [],
+        "risk_indicators": [],
+        "historical_context": [
+          "No similar historical alerts found - potentially new threat"
+        ],
+        "threat_assessment": "NOVEL_ACTIVITY",
+        "confidence_score": 10
+      },
+      "recurrence_risk": {
+        "recurrence_probability": "LOW",
+        "risk_factors": [],
+        "mitigation_urgency": "NORMAL"
+      },
+      "threat_assessment": "NOVEL_ACTIVITY",
+      "confidence_score": 10,
+      "report": "ALERT HISTORY ANALYSIS REPORT\nCurrent Alert: Explicit Credential Logon Attempt\nAlert Type: basic\nThreat Assessment: NOVEL_ACTIVITY\nHistorical Confidence: 10/100\nRecurrence Risk: LOW\nMitigation Urgency: NORMAL\nHISTORICAL CONTEXT:\n\u2022 No similar historical alerts found - potentially new threat",
+      "queries_executed": 8,
+      "es_context": {
+        "queries_available": 4,
+        "relevant_events_count": 9,
+        "data_entries_available": 58770
+      }
+    },
+    {
+      "agent_type": "ip_agent",
+      "ip_context": {
+        "primary_ip": "10.0.0.1",
+        "host": "host-200",
+        "connection_type": "3",
+        "process": "cmd.exe",
+        "user": "svc-sys",
+        "domain": "CORP",
+        "location": {
+          "country": "",
+          "city": "",
+          "coordinates": [
+            0,
+            0
+          ]
+        },
+        "alert_info": {
+          "alert_id": "9b2e5410-a3af-4d4e-9c43-fc28a72bdb35",
+          "alert_name": "Explicit Credential Logon Attempt",
+          "severity": "medium",
+          "timestamp": 1753529673431
+        }
+      },
+      "analysis_categories": [
+        "traffic_analysis",
+        "connection_analysis",
+        "geographic_analysis",
+        "reputation_analysis",
+        "behavior_analysis",
+        "communication_analysis",
+        "temporal_analysis",
+        "security_analysis"
+      ],
+      "analysis": {
+        "findings": [
+          "No direct traffic found for this IP"
+        ],
+        "risk_score": 0,
+        "network_patterns": [],
+        "security_indicators": [],
+        "anomalies": []
+      },
+      "risk_level": "NORMAL",
+      "report": "IP CONTEXT ANALYSIS\nIP Address: 10.0.0.1\nHost: host-200\nRisk Level: NORMAL\nRisk Score: 0/100\nAnalysis Focus: Alert: Explicit Credential Logon Attempt (Severity: medium). Focus on IP behavior analysis for: 10.0.0.1. Task: investigate IP authentication patterns\nNETWORK FINDINGS:\n\u2022 No direct traffic found for this IP",
+      "queries_executed": 8,
+      "es_context": {
+        "queries_available": 4,
+        "relevant_events_count": 9,
+        "data_entries_available": 58770
+      }
+    },
+    {
+      "overall_risk_level": "LOW",
+      "overall_risk_score": 30,
+      "overall_risk_reason": "Driven by user_context = LOW, ip_agent = LOW.",
+      "executive_summary": "Alert 'Explicit Credential Logon Attempt' (severity: medium) was triggered and required investigation. We examined user behavior, historical patterns and IP behavior. User behavior analysis returned LOW: No authentication activity found Historical patterns analysis returned NORMAL: Historical pattern analysis completed. Ip behavior analysis returned LOW: No direct traffic found for this IP This appears to be a low-risk situation but should be documented for trend analysis. Overall assessment: LOW risk (30/100). Recommended actions: Monitor situation for changes; Document incident details; Consider alert threshold adjustments.",
+      "agent_status": {
+        "summary": {
+          "status_label": "NORMAL",
+          "reason": "Summary compilation completed successfully."
+        },
+        "user_context": {
+          "status_label": "LOW",
+          "reason": "No authentication activity found"
+        },
+        "alert_history": {
+          "status_label": "NORMAL",
+          "reason": "Historical pattern analysis completed."
+        },
+        "ip_agent": {
+          "status_label": "LOW",
+          "reason": "No direct traffic found for this IP"
+        }
+      },
+      "highlights": [
+        "No significant security concerns identified",
+        "All analysis completed within normal parameters"
+      ],
+      "included_agents": [
+        "summary",
+        "user_context",
+        "alert_history",
+        "ip_agent"
+      ],
+      "errors": [],
+      "es_context": {
+        "queries_available": 4,
+        "relevant_events_count": 9,
+        "data_entries_available": 58770
+      }
+    },
+    {
+      "agent_type": "timeline",
+      "temporal_context": {
+        "primary_timestamp": 1753524000000,
+        "alert_timestamp": 1753529673431,
+        "event_id": 4648,
+        "user": "svc-sys",
+        "host": "host-200",
+        "ip": "10.0.0.1",
+        "process": "cmd.exe",
+        "action": "system",
+        "severity": "medium",
+        "alert_info": {
+          "alert_id": "9b2e5410-a3af-4d4e-9c43-fc28a72bdb35",
+          "alert_name": "Explicit Credential Logon Attempt",
+          "alert_severity": "medium"
+        }
+      },
+      "timeline_intent": {
+        "categories": [
+          "sequence_analysis",
+          "pattern_analysis",
+          "correlation_analysis",
+          "anomaly_analysis",
+          "progression_analysis",
+          "duration_analysis",
+          "frequency_analysis"
+        ],
+        "time_window": "contextual",
+        "focus": "comprehensive"
+      },
+      "timeline_events": [
+        {
+          "timestamp": 1753529673431,
+          "event_type": "user_analysis",
+          "description": "User analysis completed: LOW",
+          "user": "svc-sys",
+          "source": "user_context_agent",
+          "analysis_data": {
+            "agent_type": "user_context",
+            "user_context": {
+              "username": "svc-sys",
+              "domain": "CORP",
+              "host": "host-200",
+              "logon_type": "3",
+              "process": "cmd.exe",
+              "privileges": "SeSystemtimePrivilege",
+              "ip": "10.0.0.1",
+              "event_id": 4648,
+              "alert_info": {
+                "alert_id": "9b2e5410-a3af-4d4e-9c43-fc28a72bdb35",
+                "alert_name": "Explicit Credential Logon Attempt",
+                "severity": "medium",
+                "timestamp": 1753529673431
+              }
+            },
+            "analysis_categories": [
+              "authentication_analysis",
+              "activity_analysis",
+              "privilege_analysis",
+              "temporal_analysis",
+              "account_analysis",
+              "network_analysis"
+            ],
+            "analysis": {
+              "findings": [
+                "No authentication activity found"
+              ],
+              "risk_score": 15,
+              "patterns": [],
+              "anomalies": []
+            },
+            "risk_level": "LOW",
+            "report": "USER CONTEXT ANALYSIS\nUser: svc-sys\nRisk Level: LOW\nRisk Score: 15/100\nAnalysis Focus: Alert: Explicit Credential Logon Attempt (Severity: medium). Analyze user behavior, authentication patterns, and account activities. Task: investigate IP authentication patterns\nFINDINGS:\n\u2022 No authentication activity found",
+            "queries_executed": 6,
+            "es_context": {
+              "queries_available": 4,
+              "relevant_events_count": 9,
+              "data_entries_available": 58770
+            }
+          }
+        },
+        {
+          "timestamp": 1753529673431,
+          "event_type": "ip_analysis",
+          "description": "IP analysis completed: NORMAL",
+          "ip": "10.0.0.1",
+          "source": "ip_agent",
+          "analysis_data": {
+            "agent_type": "ip_agent",
+            "ip_context": {
+              "primary_ip": "10.0.0.1",
+              "host": "host-200",
+              "connection_type": "3",
+              "process": "cmd.exe",
+              "user": "svc-sys",
+              "domain": "CORP",
+              "location": {
+                "country": "",
+                "city": "",
+                "coordinates": [
+                  0,
+                  0
+                ]
+              },
+              "alert_info": {
+                "alert_id": "9b2e5410-a3af-4d4e-9c43-fc28a72bdb35",
+                "alert_name": "Explicit Credential Logon Attempt",
+                "severity": "medium",
+                "timestamp": 1753529673431
+              }
+            },
+            "analysis_categories": [
+              "traffic_analysis",
+              "connection_analysis",
+              "geographic_analysis",
+              "reputation_analysis",
+              "behavior_analysis",
+              "communication_analysis",
+              "temporal_analysis",
+              "security_analysis"
+            ],
+            "analysis": {
+              "findings": [
+                "No direct traffic found for this IP"
+              ],
+              "risk_score": 0,
+              "network_patterns": [],
+              "security_indicators": [],
+              "anomalies": []
+            },
+            "risk_level": "NORMAL",
+            "report": "IP CONTEXT ANALYSIS\nIP Address: 10.0.0.1\nHost: host-200\nRisk Level: NORMAL\nRisk Score: 0/100\nAnalysis Focus: Alert: Explicit Credential Logon Attempt (Severity: medium). Focus on IP behavior analysis for: 10.0.0.1. Task: investigate IP authentication patterns\nNETWORK FINDINGS:\n\u2022 No direct traffic found for this IP",
+            "queries_executed": 8,
+            "es_context": {
+              "queries_available": 4,
+              "relevant_events_count": 9,
+              "data_entries_available": 58770
+            }
+          }
+        }
+      ],
+      "timeline_analysis": {
+        "total_events": 2,
+        "time_span": "0 minutes",
+        "patterns": [],
+        "correlations": [],
+        "anomalies": [],
+        "progression": [],
+        "risk_score": 0
+      },
+      "report": "TIMELINE ANALYSIS REPORT\nAlert: Explicit Credential Logon Attempt\nTime Span: 0 minutes\nTotal Events: 2\nTimeline Risk Score: 0/100\nEVENT TIMELINE:\n1. User analysis completed: LOW [user_context_agent]\n2. IP analysis completed: NORMAL [ip_agent]",
+      "queries_executed": 6,
+      "es_context": {
+        "queries_available": 4,
+        "relevant_events_count": 9,
+        "data_entries_available": 58770
+      }
+    }
+  ],
+  "overall_risk_score": 30,
+  "overall_risk_level": "LOW",
+  "executive_summary": "\nINTEGRATED SECURITY ANALYSIS REPORT\n===================================\nAlert: Explicit Credential Logon Attempt\nSeverity: medium\nOverall Risk Assessment: LOW (30/100)\nAnalysis Completed: 2025-08-15 10:38:21\n\ud83c\udfaf IP BEHAVIOR ANALYSIS ACTIVE:\n\u2022 Target IP(s): 10.0.0.1\n\u2022 Analysis Focus: Network patterns and IP-centric behaviors\n\u2022 Query Type: Full-index IP behavior search\n\n\nELASTICSEARCH INTEGRATION:\n\u2022 Analysis Type: ip_behavior\n\u2022 Data Entries Analyzed: 58770\n\u2022 Relevant Events Found: 9\n\u2022 Query Success: \u2713\n\nEXECUTION SUMMARY:\n\u2022 Agents Executed: 5 successful, 0 failed\n\u2022 Total Queries: 28\n\u2022 ES Context Utilized: 5\n\nDETAILED ELASTICSEARCH QUERIES:\n\ud83c\udfaf IP BEHAVIOR ANALYSIS QUERY:\n\u2022 Target IPs: 10.0.0.1\n\u2022 Source Event IDs: b3866106-621f-4ad7-90bd-b2e2a5f0e694\n\u2022 ES Host: http://localhost:9200\n\u2022 ES Index: spharaka-windows-000001\n\u2022 Description: IP behavior analysis query for: 10.0.0.1\n\u2022 Query Size Limit: 1000\n\u2022 IP Fields Searched: clientIP, dest_ip, client_ip, src_ip, source_ip, destination_ip, sourceIP, server_ip, serverIP, srcIP, destIP, destinationIP\n\u2022 Aggregations: ip_activity_summary, timeline_activity\n\u2022 Generated Query Preview:\n{\n  \"size\": 1000,\n  \"query\": {\n    \"bool\": {\n      \"should\": [\n        {\n          \"terms\": {\n            \"srcIP\": [\n              \"10.0.0.1\"\n            ]\n          }\n        },\n        {\n          \"terms\": {\n            \"src_ip\": [\n              \"10.0.0.1\"\n            ]\n          }\n        },\n        {\n          \"terms\": {\n            \"sourceIP\": [\n              \"10.0.0.1\"\n            ]\n          }\n        },\n        {\n          \"terms\": {\n            \"source_ip\": [\n              \"10.0.0.1\"\n  ...\n  [Query truncated for display]\n\u2022 Top Relevant Event: 4740 (similarity: 0.80)\n\nAGENT RESULTS:\n\u2022 USER_CONTEXT: LOW [ES: \u2713] | 6 queries\n\u2022 ALERT_HISTORY: UNKNOWN [ES: \u2713] | 8 queries\n\u2022 IP_AGENT: NORMAL [ES: \u2713] | 8 queries\n\u2022 UNKNOWN: UNKNOWN [ES: \u2713]\n\u2022 TIMELINE: UNKNOWN [ES: \u2713] | 6 queries\n\nKEY FINDINGS:\n\u2022 [USER_CONTEXT] No authentication activity found\n\u2022 [IP_AGENT] No direct traffic found for this IP\n\u2022 [IP_AGENT] IP Address: 10.0.0.1\n\nRECOMMENDATIONS:\n\u2022 Continue monitoring situation\n\u2022 Review alert tuning if false positive\n\u2022 Document analysis for trend analysis\n\u2022 Update detection rules as needed\n\u2022 Store Elasticsearch queries for future reference\n\nERROR SUMMARY:\n\u2022 No errors encountered\n",
+  "successful_agents": 5,
+  "failed_agents": 0,
+  "es_integration_stats": {
+    "relevant_events_found": 9,
+    "queries_generated": 10,
+    "data_entries_processed": 58770,
+    "agents_with_es_context": 5
+  },
+  "analysis_timestamp": "2025-08-15T10:38:21.529457"
+}

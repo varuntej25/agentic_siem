@@ -1,0 +1,493 @@
+{
+  "orchestration": {
+    "selected_alert": {
+      "alertId": "9b2e5410-a3af-4d4e-9c43-fc28a72bdb35",
+      "triggeredAlertId": 4000,
+      "alertName": "Explicit Credential Logon Attempt",
+      "tenantId": "tenant_001",
+      "events": "{'b3866106-621f-4ad7-90bd-b2e2a5f0e694': 'windows_event_logs'}",
+      "anomalyScore": 65,
+      "threatCategory": "Detection",
+      "techniqeId": "T1021.002",
+      "subTechniqueId": "T1021.002.001",
+      "tacticId": "TA0005",
+      "alertType": "basic",
+      "recommendations": "Review event 4648 details.",
+      "description": "Logon using explicit credentials",
+      "severity": "medium",
+      "sendMail": true,
+      "ruleJson": "{\"rulename\": \"Explicit_Credential_Logon_Attempt\", \"conditions\": {\"ruleset\": [{\"fieldname\": \"eventID\", \"value\": \"4648\", \"matchtype\": \"equals\"}]}}",
+      "source": "windows_event_logs",
+      "createdAt": 1753529673431,
+      "updatedAt": 1753529673431,
+      "status": "Open"
+    },
+    "user_prompt": "analyze failed authentication attempts and brute force patterns",
+    "intent_analysis": {
+      "required_agents": [
+        "summary",
+        "alert_history",
+        "timeline",
+        "user_context"
+      ],
+      "analysis_type": "focused",
+      "routing_decision": {
+        "included_agents": [
+          "summary",
+          "alert_history",
+          "timeline",
+          "user_context"
+        ],
+        "excluded_agents": [
+          "ip_agent"
+        ],
+        "reasons": {
+          "summary": "included: policy default",
+          "alert_history": "included: policy default",
+          "timeline": "included: policy default",
+          "ip_agent": "excluded: no IP subject in prompt",
+          "user_context": "included: user subject detected in prompt"
+        },
+        "agent_prompts": {
+          "summary": "Alert: Explicit Credential Logon Attempt (Severity: medium). Compile findings from all agents and provide threat assessment. Task: analyze failed authentication attempts and brute force patterns",
+          "alert_history": "Alert: Explicit Credential Logon Attempt (Severity: medium). Find historical patterns and similar incidents. Task: analyze failed authentication attempts and brute force patterns",
+          "timeline": "Alert: Explicit Credential Logon Attempt (Severity: medium). Sort and analyze events chronologically from calling agents. Task: analyze failed authentication attempts and brute force patterns",
+          "user_context": "Alert: Explicit Credential Logon Attempt (Severity: medium). Analyze user behavior, authentication patterns, and account activities. Task: analyze failed authentication attempts and brute force patterns"
+        }
+      },
+      "primary_subjects": "{'user'}"
+    },
+    "agent_prompts": {
+      "summary": "Alert: Explicit Credential Logon Attempt (Severity: medium). Compile findings from all agents and provide threat assessment. Task: analyze failed authentication attempts and brute force patterns",
+      "alert_history": "Alert: Explicit Credential Logon Attempt (Severity: medium). Find historical patterns and similar incidents. Task: analyze failed authentication attempts and brute force patterns",
+      "timeline": "Alert: Explicit Credential Logon Attempt (Severity: medium). Sort and analyze events chronologically from calling agents. Task: analyze failed authentication attempts and brute force patterns",
+      "user_context": "Alert: Explicit Credential Logon Attempt (Severity: medium). Analyze user behavior, authentication patterns, and account activities. Task: analyze failed authentication attempts and brute force patterns"
+    },
+    "execution_plan": {
+      "step_1": "Deploy selected agents based on evidence: alert_history, timeline, user_context",
+      "step_2": "Collect agent results",
+      "step_3": "Execute timeline and alert history analysis if selected",
+      "step_4": "Generate summary report"
+    }
+  },
+  "elasticsearch_context": {
+    "alert_id": "9b2e5410-a3af-4d4e-9c43-fc28a72bdb35",
+    "user_prompt": "analyze failed authentication attempts and brute force patterns",
+    "exact_match_query": {
+      "query": {
+        "bool": {
+          "filter": [
+            {
+              "terms": {
+                "eventId": [
+                  "b3866106-621f-4ad7-90bd-b2e2a5f0e694"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "contextual_query": {
+      "query": {
+        "bool": {
+          "filter": [
+            {
+              "terms": {
+                "eventID": [
+                  4610,
+                  4740,
+                  4648,
+                  4782,
+                  4625,
+                  4723,
+                  4724
+                ]
+              }
+            },
+            {
+              "term": {
+                "srcIP": "10.0.0.1"
+              }
+            },
+            {
+              "term": {
+                "targetUsername": "svc-sys"
+              }
+            },
+            {
+              "term": {
+                "hostName": "host-200"
+              }
+            },
+            {
+              "term": {
+                "targetDomain": "CORP"
+              }
+            },
+            {
+              "term": {
+                "processName": "cmd.exe"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "combined_query": {
+      "query": {
+        "bool": {
+          "should": [
+            {
+              "bool": {
+                "filter": [
+                  {
+                    "terms": {
+                      "eventId": [
+                        "b3866106-621f-4ad7-90bd-b2e2a5f0e694"
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "bool": {
+                "filter": [
+                  {
+                    "terms": {
+                      "eventID": [
+                        4610,
+                        4740,
+                        4648,
+                        4782,
+                        4625,
+                        4723,
+                        4724
+                      ]
+                    }
+                  },
+                  {
+                    "term": {
+                      "srcIP": "10.0.0.1"
+                    }
+                  },
+                  {
+                    "term": {
+                      "targetUsername": "svc-sys"
+                    }
+                  },
+                  {
+                    "term": {
+                      "hostName": "host-200"
+                    }
+                  },
+                  {
+                    "term": {
+                      "targetDomain": "CORP"
+                    }
+                  },
+                  {
+                    "term": {
+                      "processName": "cmd.exe"
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "minimum_should_match": 1
+        }
+      },
+      "sort": [
+        {
+          "timestamp": {
+            "order": "desc"
+          }
+        }
+      ],
+      "size": 100
+    },
+    "alert_context": {
+      "alert_id": "9b2e5410-a3af-4d4e-9c43-fc28a72bdb35",
+      "event_ids": [
+        "b3866106-621f-4ad7-90bd-b2e2a5f0e694"
+      ],
+      "rule_event_ids": [
+        4648
+      ],
+      "context": {
+        "severity": "medium",
+        "alert_type": "basic",
+        "threat_category": "Detection",
+        "technique_id": null
+      }
+    },
+    "data_context": {
+      "host_name": "host-200",
+      "src_ip": "10.0.0.1",
+      "target_username": "svc-sys",
+      "account_name": "sys",
+      "target_domain": "CORP",
+      "process_name": "cmd.exe",
+      "event_id": 4648,
+      "logon_type": "3",
+      "event_type": "system"
+    }
+  },
+  "agent_results": [
+    {
+      "agent_type": "user_context",
+      "user_context": {
+        "username": "svc-sys",
+        "domain": "CORP",
+        "host": "host-200",
+        "logon_type": "3",
+        "process": "cmd.exe",
+        "privileges": "SeSystemtimePrivilege",
+        "ip": "10.0.0.1",
+        "event_id": 4648,
+        "alert_info": {
+          "alert_id": "9b2e5410-a3af-4d4e-9c43-fc28a72bdb35",
+          "alert_name": "Explicit Credential Logon Attempt",
+          "severity": "medium",
+          "timestamp": 1753529673431
+        }
+      },
+      "analysis_categories": [
+        "authentication_analysis",
+        "activity_analysis",
+        "privilege_analysis",
+        "temporal_analysis",
+        "account_analysis",
+        "network_analysis"
+      ],
+      "analysis": {
+        "findings": [
+          "No authentication activity found"
+        ],
+        "risk_score": 15,
+        "patterns": [],
+        "anomalies": []
+      },
+      "risk_level": "LOW",
+      "report": "USER CONTEXT ANALYSIS\nUser: svc-sys\nRisk Level: LOW\nRisk Score: 15/100\nAnalysis Focus: Alert: Explicit Credential Logon Attempt (Severity: medium). Analyze user behavior, authentication patterns, and account activities. Task: analyze failed authentication attempts and brute force patterns\nFINDINGS:\n\u2022 No authentication activity found",
+      "queries_executed": 6,
+      "es_context": {
+        "queries_available": 5,
+        "relevant_events_count": 7,
+        "data_entries_available": 58770
+      }
+    },
+    {
+      "agent_type": "alert_history",
+      "alert_context": {
+        "current_alert": {
+          "alert_id": "9b2e5410-a3af-4d4e-9c43-fc28a72bdb35",
+          "alert_name": "Explicit Credential Logon Attempt",
+          "severity": "medium",
+          "alert_type": "basic",
+          "threat_category": "Detection",
+          "technique_id": null,
+          "tactic_id": "TA0005",
+          "description": "Logon using explicit credentials",
+          "timestamp": 1753529673431
+        },
+        "event_id": 4648,
+        "user": "svc-sys",
+        "host": "host-200",
+        "ip": "10.0.0.1",
+        "process": "cmd.exe",
+        "domain": "CORP",
+        "logon_type": "3",
+        "source_system": "spharaka-windows"
+      },
+      "history_intent": {
+        "categories": [
+          "pattern_matching",
+          "trend_analysis",
+          "attack_correlation",
+          "user_history",
+          "ip_reputation",
+          "technique_analysis",
+          "seasonal_analysis",
+          "escalation_patterns"
+        ],
+        "lookback_period": "last_6_months",
+        "focus": "comprehensive"
+      },
+      "historical_analysis": {
+        "pattern_findings": [],
+        "trend_analysis": [],
+        "correlations": [],
+        "risk_indicators": [],
+        "historical_context": [
+          "No similar historical alerts found - potentially new threat"
+        ],
+        "threat_assessment": "NOVEL_ACTIVITY",
+        "confidence_score": 10
+      },
+      "recurrence_risk": {
+        "recurrence_probability": "LOW",
+        "risk_factors": [],
+        "mitigation_urgency": "NORMAL"
+      },
+      "threat_assessment": "NOVEL_ACTIVITY",
+      "confidence_score": 10,
+      "report": "ALERT HISTORY ANALYSIS REPORT\nCurrent Alert: Explicit Credential Logon Attempt\nAlert Type: basic\nThreat Assessment: NOVEL_ACTIVITY\nHistorical Confidence: 10/100\nRecurrence Risk: LOW\nMitigation Urgency: NORMAL\nHISTORICAL CONTEXT:\n\u2022 No similar historical alerts found - potentially new threat",
+      "queries_executed": 8,
+      "es_context": {
+        "queries_available": 5,
+        "relevant_events_count": 7,
+        "data_entries_available": 58770
+      }
+    },
+    {
+      "overall_risk_level": "LOW",
+      "overall_risk_score": 30,
+      "overall_risk_reason": "Driven by user_context = LOW; others lower.",
+      "executive_summary": "Alert 'Explicit Credential Logon Attempt' (severity: medium) was triggered and required investigation. We examined user behavior and historical patterns. User behavior analysis returned LOW: No authentication activity found Historical patterns analysis returned NORMAL: Historical pattern analysis completed. This appears to be a low-risk situation but should be documented for trend analysis. Overall assessment: LOW risk (30/100). Recommended actions: Monitor situation for changes; Document incident details; Consider alert threshold adjustments.",
+      "agent_status": {
+        "summary": {
+          "status_label": "NORMAL",
+          "reason": "Summary compilation completed successfully."
+        },
+        "user_context": {
+          "status_label": "LOW",
+          "reason": "No authentication activity found"
+        },
+        "alert_history": {
+          "status_label": "NORMAL",
+          "reason": "Historical pattern analysis completed."
+        }
+      },
+      "highlights": [
+        "No significant security concerns identified",
+        "All analysis completed within normal parameters"
+      ],
+      "included_agents": [
+        "summary",
+        "user_context",
+        "alert_history"
+      ],
+      "errors": [],
+      "es_context": {
+        "queries_available": 5,
+        "relevant_events_count": 7,
+        "data_entries_available": 58770
+      }
+    },
+    {
+      "agent_type": "timeline",
+      "temporal_context": {
+        "primary_timestamp": 1753524000000,
+        "alert_timestamp": 1753529673431,
+        "event_id": 4648,
+        "user": "svc-sys",
+        "host": "host-200",
+        "ip": "10.0.0.1",
+        "process": "cmd.exe",
+        "action": "system",
+        "severity": "medium",
+        "alert_info": {
+          "alert_id": "9b2e5410-a3af-4d4e-9c43-fc28a72bdb35",
+          "alert_name": "Explicit Credential Logon Attempt",
+          "alert_severity": "medium"
+        }
+      },
+      "timeline_intent": {
+        "categories": [
+          "sequence_analysis",
+          "pattern_analysis",
+          "correlation_analysis",
+          "anomaly_analysis",
+          "progression_analysis",
+          "duration_analysis",
+          "frequency_analysis"
+        ],
+        "time_window": "contextual",
+        "focus": "comprehensive"
+      },
+      "timeline_events": [
+        {
+          "timestamp": 1753529673431,
+          "event_type": "user_analysis",
+          "description": "User analysis completed: LOW",
+          "user": "svc-sys",
+          "source": "user_context_agent",
+          "analysis_data": {
+            "agent_type": "user_context",
+            "user_context": {
+              "username": "svc-sys",
+              "domain": "CORP",
+              "host": "host-200",
+              "logon_type": "3",
+              "process": "cmd.exe",
+              "privileges": "SeSystemtimePrivilege",
+              "ip": "10.0.0.1",
+              "event_id": 4648,
+              "alert_info": {
+                "alert_id": "9b2e5410-a3af-4d4e-9c43-fc28a72bdb35",
+                "alert_name": "Explicit Credential Logon Attempt",
+                "severity": "medium",
+                "timestamp": 1753529673431
+              }
+            },
+            "analysis_categories": [
+              "authentication_analysis",
+              "activity_analysis",
+              "privilege_analysis",
+              "temporal_analysis",
+              "account_analysis",
+              "network_analysis"
+            ],
+            "analysis": {
+              "findings": [
+                "No authentication activity found"
+              ],
+              "risk_score": 15,
+              "patterns": [],
+              "anomalies": []
+            },
+            "risk_level": "LOW",
+            "report": "USER CONTEXT ANALYSIS\nUser: svc-sys\nRisk Level: LOW\nRisk Score: 15/100\nAnalysis Focus: Alert: Explicit Credential Logon Attempt (Severity: medium). Analyze user behavior, authentication patterns, and account activities. Task: analyze failed authentication attempts and brute force patterns\nFINDINGS:\n\u2022 No authentication activity found",
+            "queries_executed": 6,
+            "es_context": {
+              "queries_available": 5,
+              "relevant_events_count": 7,
+              "data_entries_available": 58770
+            }
+          }
+        }
+      ],
+      "timeline_analysis": {
+        "total_events": 1,
+        "time_span": "Single event",
+        "patterns": [],
+        "correlations": [],
+        "anomalies": [],
+        "progression": [],
+        "risk_score": 0
+      },
+      "report": "TIMELINE ANALYSIS REPORT\nAlert: Explicit Credential Logon Attempt\nTime Span: Single event\nTotal Events: 1\nTimeline Risk Score: 0/100\nEVENT TIMELINE:\n1. User analysis completed: LOW [user_context_agent]",
+      "queries_executed": 6,
+      "es_context": {
+        "queries_available": 5,
+        "relevant_events_count": 7,
+        "data_entries_available": 58770
+      }
+    }
+  ],
+  "overall_risk_score": 30,
+  "overall_risk_level": "LOW",
+  "executive_summary": "\nINTEGRATED SECURITY ANALYSIS REPORT\n===================================\nAlert: Explicit Credential Logon Attempt\nSeverity: medium\nOverall Risk Assessment: LOW (30/100)\nAnalysis Completed: 2025-08-14 14:49:17\n\nELASTICSEARCH INTEGRATION:\n\u2022 Relevant Events Found: 7\n\u2022 Queries Generated: 3 types\n\u2022 Data Entries Analyzed: 58770\n\u2022 Event IDs Matched: ['b3866106-621f-4ad7-90bd-b2e2a5f0e694']\n\nEXECUTION SUMMARY:\n\u2022 Agents Executed: 4 successful, 0 failed\n\u2022 Total Queries: 20\n\u2022 ES Context Utilized: 4\n\nELASTICSEARCH QUERIES:\n\u2022 Exact Match Query: Targeting specific event IDs\n\u2022 Contextual Query: 6 filters applied\n\u2022 Combined Query: Merging exact and contextual searches\n\u2022 Top Relevant Event: 4724 (similarity: 0.83)\n\nAGENT RESULTS:\n\u2022 USER_CONTEXT: LOW [ES: \u2713]\n\u2022 ALERT_HISTORY: UNKNOWN [ES: \u2713]\n\u2022 UNKNOWN: UNKNOWN [ES: \u2713]\n\u2022 TIMELINE: UNKNOWN [ES: \u2713]\n\nKEY FINDINGS:\n\u2022 [USER_CONTEXT] No authentication activity found\n\u2022 [USER_CONTEXT] User: svc-sys\n\u2022 [ALERT_HISTORY] Current Alert: Explicit Credential Logon Attempt\n\u2022 [TIMELINE] Alert: Explicit Credential Logon Attempt\n\nRECOMMENDATIONS:\n\u2022 Continue monitoring situation\n\u2022 Review alert tuning if false positive\n\u2022 Document analysis for trend analysis\n\u2022 Update detection rules as needed\n\u2022 Store Elasticsearch queries for future reference\n\nERROR SUMMARY:\n\u2022 No errors encountered\n",
+  "successful_agents": 4,
+  "failed_agents": 0,
+  "es_integration_stats": {
+    "relevant_events_found": 7,
+    "queries_generated": 7,
+    "data_entries_processed": 58770,
+    "agents_with_es_context": 4
+  },
+  "analysis_timestamp": "2025-08-14T14:49:17.623665"
+}

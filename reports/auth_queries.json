@@ -1,0 +1,165 @@
+{
+  "alert_id": "9b2e5410-a3af-4d4e-9c43-fc28a72bdb35",
+  "user_prompt": "analyze failed authentication attempts and brute force patterns",
+  "exact_match_query": {
+    "query": {
+      "bool": {
+        "filter": [
+          {
+            "terms": {
+              "eventId": [
+                "b3866106-621f-4ad7-90bd-b2e2a5f0e694"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "contextual_query": {
+    "query": {
+      "bool": {
+        "filter": [
+          {
+            "terms": {
+              "eventID": [
+                4610,
+                4740,
+                4648,
+                4782,
+                4625,
+                4723,
+                4724
+              ]
+            }
+          },
+          {
+            "term": {
+              "srcIP": "10.0.0.1"
+            }
+          },
+          {
+            "term": {
+              "targetUsername": "svc-sys"
+            }
+          },
+          {
+            "term": {
+              "hostName": "host-200"
+            }
+          },
+          {
+            "term": {
+              "targetDomain": "CORP"
+            }
+          },
+          {
+            "term": {
+              "processName": "cmd.exe"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "combined_query": {
+    "query": {
+      "bool": {
+        "should": [
+          {
+            "bool": {
+              "filter": [
+                {
+                  "terms": {
+                    "eventId": [
+                      "b3866106-621f-4ad7-90bd-b2e2a5f0e694"
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "bool": {
+              "filter": [
+                {
+                  "terms": {
+                    "eventID": [
+                      4610,
+                      4740,
+                      4648,
+                      4782,
+                      4625,
+                      4723,
+                      4724
+                    ]
+                  }
+                },
+                {
+                  "term": {
+                    "srcIP": "10.0.0.1"
+                  }
+                },
+                {
+                  "term": {
+                    "targetUsername": "svc-sys"
+                  }
+                },
+                {
+                  "term": {
+                    "hostName": "host-200"
+                  }
+                },
+                {
+                  "term": {
+                    "targetDomain": "CORP"
+                  }
+                },
+                {
+                  "term": {
+                    "processName": "cmd.exe"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "minimum_should_match": 1
+      }
+    },
+    "sort": [
+      {
+        "timestamp": {
+          "order": "desc"
+        }
+      }
+    ],
+    "size": 100
+  },
+  "alert_context": {
+    "alert_id": "9b2e5410-a3af-4d4e-9c43-fc28a72bdb35",
+    "event_ids": [
+      "b3866106-621f-4ad7-90bd-b2e2a5f0e694"
+    ],
+    "rule_event_ids": [
+      4648
+    ],
+    "context": {
+      "severity": "medium",
+      "alert_type": "basic",
+      "threat_category": "Detection",
+      "technique_id": null
+    }
+  },
+  "data_context": {
+    "host_name": "host-200",
+    "src_ip": "10.0.0.1",
+    "target_username": "svc-sys",
+    "account_name": "sys",
+    "target_domain": "CORP",
+    "process_name": "cmd.exe",
+    "event_id": 4648,
+    "logon_type": "3",
+    "event_type": "system"
+  }
+}

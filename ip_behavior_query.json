@@ -1,0 +1,134 @@
+{
+  "size": 1000,
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "terms": {
+            "srcIP": [
+              "10.0.0.1"
+            ]
+          }
+        },
+        {
+          "terms": {
+            "src_ip": [
+              "10.0.0.1"
+            ]
+          }
+        },
+        {
+          "terms": {
+            "sourceIP": [
+              "10.0.0.1"
+            ]
+          }
+        },
+        {
+          "terms": {
+            "source_ip": [
+              "10.0.0.1"
+            ]
+          }
+        },
+        {
+          "terms": {
+            "destIP": [
+              "10.0.0.1"
+            ]
+          }
+        },
+        {
+          "terms": {
+            "dest_ip": [
+              "10.0.0.1"
+            ]
+          }
+        },
+        {
+          "terms": {
+            "destinationIP": [
+              "10.0.0.1"
+            ]
+          }
+        },
+        {
+          "terms": {
+            "destination_ip": [
+              "10.0.0.1"
+            ]
+          }
+        },
+        {
+          "terms": {
+            "clientIP": [
+              "10.0.0.1"
+            ]
+          }
+        },
+        {
+          "terms": {
+            "client_ip": [
+              "10.0.0.1"
+            ]
+          }
+        },
+        {
+          "terms": {
+            "serverIP": [
+              "10.0.0.1"
+            ]
+          }
+        },
+        {
+          "terms": {
+            "server_ip": [
+              "10.0.0.1"
+            ]
+          }
+        }
+      ],
+      "minimum_should_match": 1,
+      "filter": [
+        {
+          "range": {
+            "@timestamp": {
+              "gte": "now-30d"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "sort": [
+    {
+      "@timestamp": {
+        "order": "desc"
+      }
+    }
+  ],
+  "aggregations": {
+    "ip_activity_summary": {
+      "multi_terms": {
+        "terms": [
+          {
+            "field": "srcIP.keyword"
+          },
+          {
+            "field": "eventType.keyword"
+          },
+          {
+            "field": "severity.keyword"
+          }
+        ],
+        "size": 100
+      }
+    },
+    "timeline_activity": {
+      "date_histogram": {
+        "field": "@timestamp",
+        "interval": "1h"
+      }
+    }
+  }
+}

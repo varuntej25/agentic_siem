@@ -1,0 +1,331 @@
+{
+  "orchestration": {
+    "selected_alert": {
+      "alertId": "047d96df-c6e5-4103-bcc6-230cc8392b68",
+      "triggeredAlertId": 4007,
+      "alertName": "Network Share Accessed",
+      "tenantId": "tenant_001",
+      "events": "{'4667e010-2b1c-46e5-abf9-2f7c5f988d62': 'windows_event_logs'}",
+      "anomalyScore": 72,
+      "threatCategory": "Detection",
+      "techniqeId": "T1021.002",
+      "subTechniqueId": "T1021.002.001",
+      "tacticId": "TA0005",
+      "alertType": "basic",
+      "recommendations": "Review event 5140 details.",
+      "description": "A network share was accessed",
+      "severity": "medium",
+      "sendMail": true,
+      "ruleJson": "{\"rulename\": \"Network_Share_Accessed\", \"conditions\": {\"ruleset\": [{\"fieldname\": \"eventID\", \"value\": \"5140\", \"matchtype\": \"equals\"}]}}",
+      "source": "windows_event_logs",
+      "createdAt": 1753529673433,
+      "updatedAt": 1753529673433,
+      "status": "Open"
+    },
+    "user_prompt": "analyze network share access patterns and user behavior",
+    "intent_analysis": {
+      "required_agents": [
+        "alert_history",
+        "summary",
+        "timeline",
+        "ip_agent",
+        "user_context"
+      ],
+      "analysis_type": "comprehensive",
+      "similarities": {
+        "user_analysis": "0.7086483",
+        "network_analysis": "0.8103158",
+        "comprehensive": "0.6609021",
+        "timeline": "0.65623206",
+        "historical": "0.6170549"
+      }
+    },
+    "agent_prompts": {
+      "user_context": "Alert: Network Share Accessed (Severity: medium). Analyze user behavior patterns, authentication activities, account changes, and identify any anomalies or suspicious user activities. Focus on: analyze network share access patterns and user behavior",
+      "ip_agent": "Alert: Network Share Accessed (Severity: medium). Investigate network behavior, IP connections, traffic patterns, geographic anomalies, and network-based threats. Focus on: analyze network share access patterns and user behavior",
+      "timeline": "Alert: Network Share Accessed (Severity: medium). Create chronological timeline of events, sequence analysis, and temporal correlations. Organize events in time order for: analyze network share access patterns and user behavior",
+      "alert_history": "Alert: Network Share Accessed (Severity: medium). Find historical patterns, similar previous alerts, recurring incidents, and historical threat correlations. Search history for: analyze network share access patterns and user behavior",
+      "summary": "Alert: Network Share Accessed (Severity: medium). Compile all agent findings, provide comprehensive threat assessment, determine if this is a real threat, and generate actionable recommendations. Overall analysis for: analyze network share access patterns and user behavior"
+    },
+    "execution_plan": {
+      "step_1": "Deploy parallel agents: alert_history, timeline, ip_agent, user_context",
+      "step_2": "Collect agent results",
+      "step_3": "Execute timeline and alert history analysis",
+      "step_4": "Generate summary report"
+    }
+  },
+  "agent_results": [
+    {
+      "agent_type": "user_context",
+      "user_context": {
+        "username": "unknown_user",
+        "domain": "DOMAIN",
+        "host": "unknown_host",
+        "logon_type": "3",
+        "ip": "192.168.1.100",
+        "event_id": "4625",
+        "alert_info": {
+          "alert_id": "047d96df-c6e5-4103-bcc6-230cc8392b68",
+          "alert_name": "Network Share Accessed",
+          "severity": "medium",
+          "timestamp": 1753529673433
+        }
+      },
+      "analysis_categories": [
+        "authentication_analysis",
+        "activity_analysis",
+        "privilege_analysis",
+        "temporal_analysis",
+        "account_analysis",
+        "network_analysis"
+      ],
+      "analysis": {
+        "findings": [
+          "No authentication activity found"
+        ],
+        "risk_score": 15,
+        "patterns": [],
+        "anomalies": []
+      },
+      "risk_level": "LOW",
+      "report": "USER CONTEXT ANALYSIS\nUser: unknown_user\nRisk Level: LOW\nRisk Score: 15/100\nAnalysis Focus: Alert: Network Share Accessed (Severity: medium). Analyze user behavior patterns, authentication activities, account changes, and identify any anomalies or suspicious user activities. Focus on: analyze network share access patterns and user behavior\nFINDINGS:\n\u2022 No authentication activity found",
+      "queries_executed": 6
+    },
+    {
+      "agent_type": "ip_agent",
+      "ip_context": {
+        "primary_ip": "192.168.1.100",
+        "host": "unknown_host",
+        "connection_type": "3",
+        "user": "unknown_user",
+        "domain": "DOMAIN",
+        "alert_info": {
+          "alert_id": "047d96df-c6e5-4103-bcc6-230cc8392b68",
+          "alert_name": "Network Share Accessed",
+          "severity": "medium",
+          "timestamp": 1753529673433
+        }
+      },
+      "analysis_categories": [
+        "traffic_analysis",
+        "connection_analysis",
+        "geographic_analysis",
+        "reputation_analysis",
+        "behavior_analysis",
+        "communication_analysis",
+        "temporal_analysis",
+        "security_analysis"
+      ],
+      "analysis": {
+        "findings": [
+          "No traffic patterns found"
+        ],
+        "risk_score": 0,
+        "network_patterns": [],
+        "security_indicators": [],
+        "anomalies": []
+      },
+      "risk_level": "NORMAL",
+      "report": "IP CONTEXT ANALYSIS\nIP Address: 192.168.1.100\nHost: unknown_host\nRisk Level: NORMAL\nRisk Score: 0/100\nAnalysis Focus: Alert: Network Share Accessed (Severity: medium). Investigate network behavior, IP connections, traffic patterns, geographic anomalies, and network-based threats. Focus on: analyze network share access patterns and user behavior\nNETWORK FINDINGS:\n\u2022 No traffic patterns found",
+      "queries_executed": 8
+    },
+    {
+      "agent_type": "alert_history",
+      "alert_context": {
+        "current_alert": {
+          "alert_id": "047d96df-c6e5-4103-bcc6-230cc8392b68",
+          "alert_name": "Network Share Accessed",
+          "severity": "medium",
+          "alert_type": "basic",
+          "threat_category": "Detection",
+          "technique_id": null,
+          "tactic_id": "TA0005",
+          "description": "A network share was accessed",
+          "timestamp": 1753529673433
+        },
+        "event_id": "4625",
+        "user": "unknown_user",
+        "host": "unknown_host",
+        "ip": "192.168.1.100",
+        "domain": "DOMAIN",
+        "logon_type": "3"
+      },
+      "history_intent": {
+        "categories": [
+          "pattern_matching",
+          "trend_analysis",
+          "attack_correlation",
+          "user_history",
+          "ip_reputation",
+          "technique_analysis",
+          "seasonal_analysis",
+          "escalation_patterns"
+        ],
+        "lookback_period": "last_6_months",
+        "focus": "comprehensive"
+      },
+      "historical_analysis": {
+        "pattern_findings": [],
+        "trend_analysis": [],
+        "correlations": [],
+        "risk_indicators": [],
+        "historical_context": [
+          "No similar historical alerts found - potentially new threat"
+        ],
+        "threat_assessment": "NOVEL_ACTIVITY",
+        "confidence_score": 10
+      },
+      "recurrence_risk": {
+        "recurrence_probability": "LOW",
+        "risk_factors": [],
+        "mitigation_urgency": "NORMAL"
+      },
+      "threat_assessment": "NOVEL_ACTIVITY",
+      "confidence_score": 10,
+      "report": "ALERT HISTORY ANALYSIS REPORT\nCurrent Alert: Network Share Accessed\nAlert Type: basic\nThreat Assessment: NOVEL_ACTIVITY\nHistorical Confidence: 10/100\nRecurrence Risk: LOW\nMitigation Urgency: NORMAL\nHISTORICAL CONTEXT:\n\u2022 No similar historical alerts found - potentially new threat",
+      "queries_executed": 8
+    },
+    {
+      "agent_type": "timeline",
+      "temporal_context": {
+        "primary_timestamp": 1755156915.471036,
+        "alert_timestamp": 1753529673433,
+        "event_id": "4625",
+        "user": "unknown_user",
+        "host": "unknown_host",
+        "ip": "192.168.1.100",
+        "severity": "medium",
+        "alert_info": {
+          "alert_id": "047d96df-c6e5-4103-bcc6-230cc8392b68",
+          "alert_name": "Network Share Accessed",
+          "alert_severity": "medium"
+        }
+      },
+      "timeline_intent": {
+        "categories": [
+          "sequence_analysis",
+          "pattern_analysis",
+          "correlation_analysis",
+          "anomaly_analysis",
+          "progression_analysis",
+          "duration_analysis",
+          "frequency_analysis"
+        ],
+        "time_window": "contextual",
+        "focus": "comprehensive"
+      },
+      "timeline_events": [
+        {
+          "timestamp": 1753529673433,
+          "event_type": "user_analysis",
+          "description": "User analysis completed: LOW",
+          "user": "unknown_user",
+          "source": "user_context_agent",
+          "analysis_data": {
+            "agent_type": "user_context",
+            "user_context": {
+              "username": "unknown_user",
+              "domain": "DOMAIN",
+              "host": "unknown_host",
+              "logon_type": "3",
+              "ip": "192.168.1.100",
+              "event_id": "4625",
+              "alert_info": {
+                "alert_id": "047d96df-c6e5-4103-bcc6-230cc8392b68",
+                "alert_name": "Network Share Accessed",
+                "severity": "medium",
+                "timestamp": 1753529673433
+              }
+            },
+            "analysis_categories": [
+              "authentication_analysis",
+              "activity_analysis",
+              "privilege_analysis",
+              "temporal_analysis",
+              "account_analysis",
+              "network_analysis"
+            ],
+            "analysis": {
+              "findings": [
+                "No authentication activity found"
+              ],
+              "risk_score": 15,
+              "patterns": [],
+              "anomalies": []
+            },
+            "risk_level": "LOW",
+            "report": "USER CONTEXT ANALYSIS\nUser: unknown_user\nRisk Level: LOW\nRisk Score: 15/100\nAnalysis Focus: Alert: Network Share Accessed (Severity: medium). Analyze user behavior patterns, authentication activities, account changes, and identify any anomalies or suspicious user activities. Focus on: analyze network share access patterns and user behavior\nFINDINGS:\n\u2022 No authentication activity found",
+            "queries_executed": 6
+          }
+        },
+        {
+          "timestamp": 1753529673433,
+          "event_type": "ip_analysis",
+          "description": "IP analysis completed: NORMAL",
+          "ip": "192.168.1.100",
+          "source": "ip_agent",
+          "analysis_data": {
+            "agent_type": "ip_agent",
+            "ip_context": {
+              "primary_ip": "192.168.1.100",
+              "host": "unknown_host",
+              "connection_type": "3",
+              "user": "unknown_user",
+              "domain": "DOMAIN",
+              "alert_info": {
+                "alert_id": "047d96df-c6e5-4103-bcc6-230cc8392b68",
+                "alert_name": "Network Share Accessed",
+                "severity": "medium",
+                "timestamp": 1753529673433
+              }
+            },
+            "analysis_categories": [
+              "traffic_analysis",
+              "connection_analysis",
+              "geographic_analysis",
+              "reputation_analysis",
+              "behavior_analysis",
+              "communication_analysis",
+              "temporal_analysis",
+              "security_analysis"
+            ],
+            "analysis": {
+              "findings": [
+                "No traffic patterns found"
+              ],
+              "risk_score": 0,
+              "network_patterns": [],
+              "security_indicators": [],
+              "anomalies": []
+            },
+            "risk_level": "NORMAL",
+            "report": "IP CONTEXT ANALYSIS\nIP Address: 192.168.1.100\nHost: unknown_host\nRisk Level: NORMAL\nRisk Score: 0/100\nAnalysis Focus: Alert: Network Share Accessed (Severity: medium). Investigate network behavior, IP connections, traffic patterns, geographic anomalies, and network-based threats. Focus on: analyze network share access patterns and user behavior\nNETWORK FINDINGS:\n\u2022 No traffic patterns found",
+            "queries_executed": 8
+          }
+        }
+      ],
+      "timeline_analysis": {
+        "total_events": 2,
+        "time_span": "0 minutes",
+        "patterns": [],
+        "correlations": [],
+        "anomalies": [],
+        "progression": [],
+        "risk_score": 0
+      },
+      "report": "TIMELINE ANALYSIS REPORT\nAlert: Network Share Accessed\nTime Span: 0 minutes\nTotal Events: 2\nTimeline Risk Score: 0/100\nEVENT TIMELINE:\n1. User analysis completed: LOW [user_context_agent]\n2. IP analysis completed: NORMAL [ip_agent]",
+      "queries_executed": 6
+    },
+    {
+      "agent_type": "summary",
+      "status": "completed",
+      "summary": "Analysis completed for Network Share Accessed"
+    }
+  ],
+  "overall_risk_score": 30,
+  "overall_risk_level": "LOW",
+  "executive_summary": "\nSECURITY ANALYSIS REPORT\n========================\nAlert: Network Share Accessed\nSeverity: medium\nOverall Risk Assessment: LOW (30/100)\nAnalysis Completed: 2025-08-14 13:07:09\n\nEXECUTION SUMMARY:\n\u2022 Agents Executed: 5 successful, 0 failed\n\u2022 Total Queries: 28\n\nAGENT RESULTS:\n\u2022 USER_CONTEXT: LOW\n\u2022 IP_AGENT: NORMAL\n\u2022 ALERT_HISTORY: UNKNOWN\n\u2022 TIMELINE: UNKNOWN\n\u2022 SUMMARY: UNKNOWN\n\nKEY FINDINGS:\n\u2022 [USER_CONTEXT] No authentication activity found\n\u2022 [USER_CONTEXT] User: unknown_user\n\u2022 [IP_AGENT] No traffic patterns found\n\u2022 [IP_AGENT] IP Address: 192.168.1.100\n\u2022 [ALERT_HISTORY] Current Alert: Network Share Accessed\n\nRECOMMENDATIONS:\n\u2022 Continue monitoring situation\n\u2022 Review alert tuning if false positive\n\u2022 Document analysis for trend analysis\n\u2022 Update detection rules as needed\n\nERROR SUMMARY:\n\u2022 No errors encountered\n",
+  "successful_agents": 5,
+  "failed_agents": 0,
+  "analysis_timestamp": "2025-08-14T13:07:09.664003"
+}

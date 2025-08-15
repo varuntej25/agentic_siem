@@ -1,0 +1,88 @@
+{
+  "orchestration": {
+    "selected_alert": {
+      "alertId": "0964f484-4930-4ede-ac51-b968dbcfc971",
+      "triggeredAlertId": 4009,
+      "alertName": "Detailed Share Access",
+      "tenantId": "tenant_001",
+      "events": "{'3bf68108-5e4b-47fe-b51e-cde4530ccfa9': 'windows_event_logs'}",
+      "anomalyScore": 74,
+      "threatCategory": "Detection",
+      "techniqeId": "T1021.002",
+      "subTechniqueId": "T1021.002.001",
+      "tacticId": "TA0005",
+      "alertType": "basic",
+      "recommendations": "Review event 5145 details.",
+      "description": "Detailed information about a share access",
+      "severity": "medium",
+      "sendMail": true,
+      "ruleJson": "{\"rulename\": \"Detailed_Share_Access\", \"conditions\": {\"ruleset\": [{\"fieldname\": \"eventID\", \"value\": \"5145\", \"matchtype\": \"equals\"}]}}",
+      "source": "windows_event_logs",
+      "createdAt": 1753529673433,
+      "updatedAt": 1753529673433,
+      "status": "Open"
+    },
+    "user_prompt": "summary only",
+    "intent_analysis": {
+      "required_agents": [
+        "summary"
+      ],
+      "analysis_type": "comprehensive",
+      "routing_decision": {
+        "included_agents": [
+          "summary"
+        ],
+        "excluded_agents": [
+          "alert_history",
+          "timeline",
+          "user_context",
+          "ip_agent"
+        ],
+        "reasons": {
+          "summary": "included: explicit 'summary only' directive",
+          "alert_history": "excluded: 'summary only' directive",
+          "timeline": "excluded: 'summary only' directive",
+          "user_context": "excluded: 'summary only' directive",
+          "ip_agent": "excluded: 'summary only' directive"
+        },
+        "agent_prompts": {
+          "summary": "Alert: Detailed Share Access (Severity: medium). Compile findings from all agents and provide threat assessment. Task: summary only"
+        }
+      },
+      "evidence_signals": {
+        "user_focused": false,
+        "ip_focused": false,
+        "timeline_requested": false,
+        "history_requested": false,
+        "user_entities": [
+          "summary",
+          "only"
+        ],
+        "ip_entities": [],
+        "explicit_keywords": []
+      }
+    },
+    "agent_prompts": {
+      "summary": "Alert: Detailed Share Access (Severity: medium). Compile findings from all agents and provide threat assessment. Task: summary only"
+    },
+    "execution_plan": {
+      "step_1": "Deploy selected agents based on evidence: ",
+      "step_2": "Collect agent results",
+      "step_3": "Execute timeline and alert history analysis if selected",
+      "step_4": "Generate summary report"
+    }
+  },
+  "agent_results": [
+    {
+      "agent_type": "summary",
+      "status": "completed",
+      "summary": "Analysis completed for Detailed Share Access"
+    }
+  ],
+  "overall_risk_score": 0,
+  "overall_risk_level": "NORMAL",
+  "executive_summary": "\nSECURITY ANALYSIS REPORT\n========================\nAlert: Detailed Share Access\nSeverity: medium\nOverall Risk Assessment: NORMAL (0/100)\nAnalysis Completed: 2025-08-14 13:49:15\n\nEXECUTION SUMMARY:\n\u2022 Agents Executed: 1 successful, 0 failed\n\u2022 Total Queries: 0\n\nAGENT RESULTS:\n\u2022 SUMMARY: UNKNOWN\n\nKEY FINDINGS:\n\u2022 No significant findings detected\n\nRECOMMENDATIONS:\n\u2022 Continue monitoring situation\n\u2022 Review alert tuning if false positive\n\u2022 Document analysis for trend analysis\n\u2022 Update detection rules as needed\n\nERROR SUMMARY:\n\u2022 No errors encountered\n",
+  "successful_agents": 1,
+  "failed_agents": 0,
+  "analysis_timestamp": "2025-08-14T13:49:15.854208"
+}

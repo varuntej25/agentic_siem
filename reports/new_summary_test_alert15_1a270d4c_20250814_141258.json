@@ -1,0 +1,293 @@
+{
+  "orchestration": {
+    "selected_alert": {
+      "alertId": "1a270d4c-e49c-42ad-9602-c508f9798f23",
+      "triggeredAlertId": 2004,
+      "alertName": "Failed Logon from Unknown Host",
+      "tenantId": "tenant_001",
+      "events": "{'c0e932ba-10d3-44c6-a013-b0305644e608': 'windows_event_logs'}",
+      "anomalyScore": 75,
+      "threatCategory": "Detection",
+      "techniqeId": "T1059",
+      "subTechniqueId": "T1059.001",
+      "tacticId": "TA0002",
+      "alertType": "basic",
+      "recommendations": "Investigate host activity.",
+      "description": "Repeated failed logins from unfamiliar host",
+      "severity": "high",
+      "sendMail": true,
+      "ruleJson": "{\"rulename\": \"Failed_Logon_Unknown_Host\", \"conditions\": {\"ruleset\": [{\"fieldname\": \"eventType\", \"value\": \"authentication\", \"matchtype\": \"equals\"}, {\"fieldname\": \"status\", \"value\": \"failed\", \"matchtype\": \"equals\"}]}}",
+      "source": "windows_event_logs",
+      "createdAt": 1753528539300,
+      "updatedAt": 1753528539300,
+      "status": "Open"
+    },
+    "user_prompt": "investigate ip behaviour",
+    "intent_analysis": {
+      "required_agents": [
+        "summary",
+        "alert_history",
+        "timeline",
+        "ip_agent"
+      ],
+      "analysis_type": "focused",
+      "routing_decision": {
+        "included_agents": [
+          "summary",
+          "alert_history",
+          "timeline",
+          "ip_agent"
+        ],
+        "excluded_agents": [
+          "user_context"
+        ],
+        "reasons": {
+          "summary": "included: policy default",
+          "alert_history": "included: policy default",
+          "timeline": "included: policy default",
+          "ip_agent": "included: IP subject detected in prompt",
+          "user_context": "excluded: no user subject in prompt"
+        },
+        "agent_prompts": {
+          "summary": "Alert: Failed Logon from Unknown Host (Severity: high). Compile findings from all agents and provide threat assessment. Task: investigate ip behaviour",
+          "alert_history": "Alert: Failed Logon from Unknown Host (Severity: high). Find historical patterns and similar incidents. Task: investigate ip behaviour",
+          "timeline": "Alert: Failed Logon from Unknown Host (Severity: high). Sort and analyze events chronologically from calling agents. Task: investigate ip behaviour",
+          "ip_agent": "Alert: Failed Logon from Unknown Host (Severity: high). Investigate network behavior, IP connections, and traffic patterns. Task: investigate ip behaviour"
+        }
+      },
+      "primary_subjects": "{'ip'}"
+    },
+    "agent_prompts": {
+      "summary": "Alert: Failed Logon from Unknown Host (Severity: high). Compile findings from all agents and provide threat assessment. Task: investigate ip behaviour",
+      "alert_history": "Alert: Failed Logon from Unknown Host (Severity: high). Find historical patterns and similar incidents. Task: investigate ip behaviour",
+      "timeline": "Alert: Failed Logon from Unknown Host (Severity: high). Sort and analyze events chronologically from calling agents. Task: investigate ip behaviour",
+      "ip_agent": "Alert: Failed Logon from Unknown Host (Severity: high). Investigate network behavior, IP connections, and traffic patterns. Task: investigate ip behaviour"
+    },
+    "execution_plan": {
+      "step_1": "Deploy selected agents based on evidence: alert_history, timeline, ip_agent",
+      "step_2": "Collect agent results",
+      "step_3": "Execute timeline and alert history analysis if selected",
+      "step_4": "Generate summary report"
+    }
+  },
+  "agent_results": [
+    {
+      "agent_type": "alert_history",
+      "alert_context": {
+        "current_alert": {
+          "alert_id": "1a270d4c-e49c-42ad-9602-c508f9798f23",
+          "alert_name": "Failed Logon from Unknown Host",
+          "severity": "high",
+          "alert_type": "basic",
+          "threat_category": "Detection",
+          "technique_id": null,
+          "tactic_id": "TA0002",
+          "description": "Repeated failed logins from unfamiliar host",
+          "timestamp": 1753528539300
+        },
+        "event_id": "4625",
+        "user": "unknown_user",
+        "host": "unknown_host",
+        "ip": "192.168.1.100",
+        "domain": "DOMAIN",
+        "logon_type": "3"
+      },
+      "history_intent": {
+        "categories": [
+          "pattern_matching",
+          "trend_analysis",
+          "attack_correlation",
+          "user_history",
+          "ip_reputation",
+          "technique_analysis",
+          "seasonal_analysis",
+          "escalation_patterns"
+        ],
+        "lookback_period": "last_6_months",
+        "focus": "comprehensive"
+      },
+      "historical_analysis": {
+        "pattern_findings": [],
+        "trend_analysis": [],
+        "correlations": [],
+        "risk_indicators": [],
+        "historical_context": [
+          "No similar historical alerts found - potentially new threat"
+        ],
+        "threat_assessment": "NOVEL_ACTIVITY",
+        "confidence_score": 10
+      },
+      "recurrence_risk": {
+        "recurrence_probability": "LOW",
+        "risk_factors": [],
+        "mitigation_urgency": "NORMAL"
+      },
+      "threat_assessment": "NOVEL_ACTIVITY",
+      "confidence_score": 10,
+      "report": "ALERT HISTORY ANALYSIS REPORT\nCurrent Alert: Failed Logon from Unknown Host\nAlert Type: basic\nThreat Assessment: NOVEL_ACTIVITY\nHistorical Confidence: 10/100\nRecurrence Risk: LOW\nMitigation Urgency: NORMAL\nHISTORICAL CONTEXT:\n\u2022 No similar historical alerts found - potentially new threat",
+      "queries_executed": 8
+    },
+    {
+      "agent_type": "ip_agent",
+      "ip_context": {
+        "primary_ip": "192.168.1.100",
+        "host": "unknown_host",
+        "connection_type": "3",
+        "user": "unknown_user",
+        "domain": "DOMAIN",
+        "alert_info": {
+          "alert_id": "1a270d4c-e49c-42ad-9602-c508f9798f23",
+          "alert_name": "Failed Logon from Unknown Host",
+          "severity": "high",
+          "timestamp": 1753528539300
+        }
+      },
+      "analysis_categories": [
+        "traffic_analysis",
+        "connection_analysis",
+        "geographic_analysis",
+        "reputation_analysis",
+        "behavior_analysis",
+        "communication_analysis",
+        "temporal_analysis",
+        "security_analysis"
+      ],
+      "analysis": {
+        "findings": [
+          "No traffic patterns found"
+        ],
+        "risk_score": 0,
+        "network_patterns": [],
+        "security_indicators": [],
+        "anomalies": []
+      },
+      "risk_level": "NORMAL",
+      "report": "IP CONTEXT ANALYSIS\nIP Address: 192.168.1.100\nHost: unknown_host\nRisk Level: NORMAL\nRisk Score: 0/100\nAnalysis Focus: Alert: Failed Logon from Unknown Host (Severity: high). Investigate network behavior, IP connections, and traffic patterns. Task: investigate ip behaviour\nNETWORK FINDINGS:\n\u2022 No traffic patterns found",
+      "queries_executed": 8
+    },
+    {
+      "overall_risk_level": "LOW",
+      "overall_risk_score": 30,
+      "overall_risk_reason": "Driven by ip_agent = LOW; others lower.",
+      "executive_summary": "Alert 'Failed Logon from Unknown Host' (severity: high) was triggered and required investigation. We examined historical patterns and IP behavior. Historical patterns analysis returned NORMAL: Historical pattern analysis completed. Ip behavior analysis returned LOW: No traffic patterns found This appears to be a low-risk situation but should be documented for trend analysis. Overall assessment: LOW risk (30/100). Recommended actions: Monitor situation for changes; Document incident details; Consider alert threshold adjustments.",
+      "agent_status": {
+        "summary": {
+          "status_label": "NORMAL",
+          "reason": "Summary compilation completed successfully."
+        },
+        "alert_history": {
+          "status_label": "NORMAL",
+          "reason": "Historical pattern analysis completed."
+        },
+        "ip_agent": {
+          "status_label": "LOW",
+          "reason": "No traffic patterns found"
+        }
+      },
+      "highlights": [
+        "No significant security concerns identified",
+        "All analysis completed within normal parameters"
+      ],
+      "included_agents": [
+        "summary",
+        "alert_history",
+        "ip_agent"
+      ],
+      "errors": []
+    },
+    {
+      "agent_type": "timeline",
+      "temporal_context": {
+        "primary_timestamp": 1755160864.575098,
+        "alert_timestamp": 1753528539300,
+        "event_id": "4625",
+        "user": "unknown_user",
+        "host": "unknown_host",
+        "ip": "192.168.1.100",
+        "severity": "high",
+        "alert_info": {
+          "alert_id": "1a270d4c-e49c-42ad-9602-c508f9798f23",
+          "alert_name": "Failed Logon from Unknown Host",
+          "alert_severity": "high"
+        }
+      },
+      "timeline_intent": {
+        "categories": [
+          "sequence_analysis",
+          "pattern_analysis",
+          "correlation_analysis",
+          "anomaly_analysis",
+          "progression_analysis",
+          "duration_analysis",
+          "frequency_analysis"
+        ],
+        "time_window": "contextual",
+        "focus": "comprehensive"
+      },
+      "timeline_events": [
+        {
+          "timestamp": 1753528539300,
+          "event_type": "ip_analysis",
+          "description": "IP analysis completed: NORMAL",
+          "ip": "192.168.1.100",
+          "source": "ip_agent",
+          "analysis_data": {
+            "agent_type": "ip_agent",
+            "ip_context": {
+              "primary_ip": "192.168.1.100",
+              "host": "unknown_host",
+              "connection_type": "3",
+              "user": "unknown_user",
+              "domain": "DOMAIN",
+              "alert_info": {
+                "alert_id": "1a270d4c-e49c-42ad-9602-c508f9798f23",
+                "alert_name": "Failed Logon from Unknown Host",
+                "severity": "high",
+                "timestamp": 1753528539300
+              }
+            },
+            "analysis_categories": [
+              "traffic_analysis",
+              "connection_analysis",
+              "geographic_analysis",
+              "reputation_analysis",
+              "behavior_analysis",
+              "communication_analysis",
+              "temporal_analysis",
+              "security_analysis"
+            ],
+            "analysis": {
+              "findings": [
+                "No traffic patterns found"
+              ],
+              "risk_score": 0,
+              "network_patterns": [],
+              "security_indicators": [],
+              "anomalies": []
+            },
+            "risk_level": "NORMAL",
+            "report": "IP CONTEXT ANALYSIS\nIP Address: 192.168.1.100\nHost: unknown_host\nRisk Level: NORMAL\nRisk Score: 0/100\nAnalysis Focus: Alert: Failed Logon from Unknown Host (Severity: high). Investigate network behavior, IP connections, and traffic patterns. Task: investigate ip behaviour\nNETWORK FINDINGS:\n\u2022 No traffic patterns found",
+            "queries_executed": 8
+          }
+        }
+      ],
+      "timeline_analysis": {
+        "total_events": 1,
+        "time_span": "Single event",
+        "patterns": [],
+        "correlations": [],
+        "anomalies": [],
+        "progression": [],
+        "risk_score": 0
+      },
+      "report": "TIMELINE ANALYSIS REPORT\nAlert: Failed Logon from Unknown Host\nTime Span: Single event\nTotal Events: 1\nTimeline Risk Score: 0/100\nEVENT TIMELINE:\n1. IP analysis completed: NORMAL [ip_agent]",
+      "queries_executed": 6
+    }
+  ],
+  "overall_risk_score": 10,
+  "overall_risk_level": "NORMAL",
+  "executive_summary": "\nSECURITY ANALYSIS REPORT\n========================\nAlert: Failed Logon from Unknown Host\nSeverity: high\nOverall Risk Assessment: NORMAL (10/100)\nAnalysis Completed: 2025-08-14 14:12:58\n\nEXECUTION SUMMARY:\n\u2022 Agents Executed: 4 successful, 0 failed\n\u2022 Total Queries: 22\n\nAGENT RESULTS:\n\u2022 ALERT_HISTORY: UNKNOWN\n\u2022 IP_AGENT: NORMAL\n\u2022 UNKNOWN: UNKNOWN\n\u2022 TIMELINE: UNKNOWN\n\nKEY FINDINGS:\n\u2022 [ALERT_HISTORY] Current Alert: Failed Logon from Unknown Host\n\u2022 [IP_AGENT] No traffic patterns found\n\u2022 [IP_AGENT] IP Address: 192.168.1.100\n\u2022 [TIMELINE] Alert: Failed Logon from Unknown Host\n\nRECOMMENDATIONS:\n\u2022 Continue monitoring situation\n\u2022 Review alert tuning if false positive\n\u2022 Document analysis for trend analysis\n\u2022 Update detection rules as needed\n\nERROR SUMMARY:\n\u2022 No errors encountered\n",
+  "successful_agents": 4,
+  "failed_agents": 0,
+  "analysis_timestamp": "2025-08-14T14:12:58.602357"
+}

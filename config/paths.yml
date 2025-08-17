@@ -1,0 +1,34 @@
+paths:
+  # alerts: "alerts.jsonl"
+  # data: "data.json"
+  events: "Spharaka-Windows_Events_Filtered.json"
+  output_dir: "reports"
+
+# GPU Acceleration Settings
+gpu:
+  force_cpu: false          # Set to true to disable GPU
+  cuda_device: 0           # CUDA device ID
+  enable_amp: true         # Automatic Mixed Precision
+  memory_fraction: null    # GPU memory limit (0.0-1.0, null for no limit)
+  batch_size: 16          # Base batch size for processing
+
+# Elasticsearch Configuration
+es:
+  host: "http://10.9.56.10:30200"        # ES host URL
+  index: "spharaka-windows"     # Default index name
+  timeout: 30                          # Request timeout in seconds
+
+# Search Configuration  
+search:
+  default_time_range: "now-30d"        # Default time window
+  size: 500                            # Default result size limit
+  sort_field: "@timestamp"             # Default sort field
+  sort_order: "desc"                   # Default sort order (asc/desc)
+  ip_behavior_size: 1000              # Specific size limit for IP behavior queries
+
+# Semantic Similarity Configuration
+semantic:
+  enable_for_ip_behavior: true         # Enable semantic similarity for IP behavior queries
+  default_threshold: 0.3               # Default similarity threshold
+  ip_behavior_threshold: 0.2           # Lower threshold for IP behavior (more inclusive)
+  max_relevant_events: 10              # Maximum relevant events to return
